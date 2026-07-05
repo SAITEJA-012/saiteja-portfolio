@@ -1,0 +1,185 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import "primeicons/primeicons.css";
+
+:root {
+    --oat: #f0e6da;
+    --oat-light: #faf6f0;
+    --oat-dark: #ddd0bf;
+    --oat-deep: #c9b49a;
+    --olive: #415b06;
+    --olive-rgb: 65, 91, 6;
+    --olive-mid: #557210;
+    --olive-light: #6a8c1a;
+    --olive-dark: #293803;
+    --bark: #1e1a14;
+    --sand: #a89070;
+    --cream: #faf6f0;
+    --color-bg: var(--oat);
+    --color-bg-alt: var(--oat-dark);
+    --color-surface: hsla(33, 42%, 90%, .72);
+    --color-primary: var(--olive);
+    --color-text: var(--bark);
+    --color-text-mid: #4a3e2e;
+    --color-text-muted: var(--sand);
+    --color-border: rgba(65, 91, 6, .16);
+    --color-accent: #8bab2a;
+    --primary-color: #415b06;
+    --shadow-xs: 0 1px 4px rgba(41, 56, 3, .08);
+    --shadow-sm: 0 2px 12px rgba(41, 56, 3, .1);
+    --shadow-md: 0 8px 32px rgba(41, 56, 3, .12);
+    --shadow-lg: 0 24px 64px rgba(41, 56, 3, .16);
+    --shadow-glow: 0 0 48px rgba(65, 91, 6, .2);
+    --r-sm: 8px;
+    --r-md: 14px;
+    --r-lg: 22px;
+    --r-xl: 32px;
+    --r-full: 9999px;
+}
+
+.p-dark {
+    --oat: #14110d;
+    --oat-light: #1c1813;
+    --oat-dark: #0f0d0a;
+    --oat-deep: #2a241c;
+    --bark: #f5efe6;
+    --sand: #b9ab95;
+    --cream: #14110d;
+    --color-bg: #0e0b09;
+    --color-bg-alt: #15120f;
+    --color-surface: rgba(22, 18, 14, .75);
+    --color-text: #f5efe6;
+    --color-text-mid: #d6cab8;
+    --color-text-muted: #b9ab95;
+    --color-border: hsla(33, 30%, 70%, .2);
+    --color-primary: #8bab2a;
+    --color-accent: #8bab2a;
+    --primary-color: #8bab2a;
+}
+
+*, :after, :before {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+    font-size: 16px;
+    font-family: "Sora", system-ui, -apple-system, sans-serif;
+}
+
+body {
+    background-color: var(--color-bg) !important;
+    color: var(--color-text);
+    min-height: 100vh;
+    overflow-x: hidden;
+    line-height: 1.65;
+    transition: background-color 0.35s ease, color 0.35s ease;
+}
+
+/* Override dark mode body background to Ameya Jarvis Warm Dark Oat (#0e0b09) */
+.p-dark body {
+    background-color: #0e0b09 !important;
+    color: #f5efe6;
+}
+
+/* Minimalist scrollbar exactly as in user recording */
+::-webkit-scrollbar {
+    width: 5px;
+}
+::-webkit-scrollbar-thumb {
+    background: var(--olive-mid);
+    border-radius: var(--r-full);
+}
+::-webkit-scrollbar-track {
+    background: var(--oat-dark);
+}
+::-webkit-scrollbar-thumb:hover {
+    background: var(--olive);
+}
+
+/* Classy Grid & Radial Glow background (Ameya Jarvis Style) */
+.bg-grid-pattern {
+    background-image: 
+      radial-gradient(ellipse 80% 50% at 15% -8%, rgba(65, 91, 6, 0.08) 0%, transparent 70%),
+      radial-gradient(ellipse 60% 45% at 85% 105%, rgba(65, 91, 6, 0.06) 0%, transparent 70%),
+      linear-gradient(to right, rgba(65, 91, 6, 0.04) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(65, 91, 6, 0.04) 1px, transparent 1px);
+    background-size: 100% 100%, 100% 100%, 80px 80px, 80px 80px;
+    background-position: center top;
+}
+
+.p-dark .bg-grid-pattern {
+    background-image: 
+      radial-gradient(ellipse 80% 50% at 15% -8%, rgba(106, 140, 26, 0.12) 0%, transparent 70%),
+      radial-gradient(ellipse 60% 45% at 85% 105%, rgba(65, 91, 6, 0.08) 0%, transparent 70%),
+      linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+}
+
+/* Custom styles for glowing dot */
+.online-dot {
+    position: relative;
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    background-color: #6a8c1a;
+    border-radius: 50%;
+}
+.online-dot::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background-color: #6a8c1a;
+    animation: pulse-glow 2s infinite ease-in-out;
+}
+@keyframes pulse-glow {
+    0% { transform: scale(1); opacity: 0.8; }
+    100% { transform: scale(3); opacity: 0; }
+}
+
+/* Cursive / editorial text utility */
+.font-cursive-style {
+    font-family: 'Dancing Script', 'Playfair Display', cursive, serif;
+}
+
+/* Interactive Hover Flash Effect (Sweeping Shine from Start to End) */
+.hover-flash {
+    position: relative;
+    overflow: hidden;
+}
+.hover-flash::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 60%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(255, 255, 255, 0.45) 50%,
+        transparent 100%
+    );
+    transform: skewX(-25deg);
+    transition: left 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    pointer-events: none;
+    z-index: 20;
+}
+.p-dark .hover-flash::before {
+    background: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(255, 255, 255, 0.22) 50%,
+        transparent 100%
+    );
+}
+.hover-flash:hover::before {
+    left: 150%;
+}

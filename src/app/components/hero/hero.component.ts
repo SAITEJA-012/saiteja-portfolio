@@ -18,10 +18,10 @@ import { CommonModule } from '@angular/common';
               <span>AI ENTHUSIAST</span>
             </div>
             
-            <!-- Main Title in One Line with Refined Space Grotesk Weights -->
-            <h1 class="text-4xl sm:text-6xl md:text-7xl lg:text-8xl tracking-tight leading-tight whitespace-nowrap mb-4 font-heading">
-              <span class="font-bold text-[#1e1a14] dark:text-[#f5efe6]">Saiteja</span>
-              <span class="font-medium text-[#415b06] dark:text-[#8bab2a] ml-2 sm:ml-4">Athmakuri</span>
+            <!-- Main Title in One Line with Refined Space Grotesk Weights and Size -->
+            <h1 class="text-3xl sm:text-5xl md:text-6xl lg:text-7xl tracking-tight leading-tight whitespace-nowrap mb-4 font-heading">
+              <span class="font-semibold text-[#1e1a14] dark:text-[#f5efe6]">Saiteja</span>
+              <span class="font-normal text-[#415b06] dark:text-[#8bab2a] ml-2 sm:ml-3">Athmakuri</span>
             </h1>
             
             <!-- Subtitle / Role (No Hover Background Box) -->

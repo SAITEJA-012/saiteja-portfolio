@@ -15,14 +15,13 @@ import { CommonModule } from '@angular/common';
             <!-- Eyebrow Pill / Status -->
             <div class="inline-flex items-center gap-2.5 text-xs font-bold font-mono tracking-widest uppercase text-[#415b06] dark:text-[#8bab2a] mb-6">
               <span class="online-dot"></span>
-              <span>DATABASE &amp; FULL STACK ENGINEERING</span>
+              <span>AI ENTHUSIAST</span>
             </div>
             
-            <!-- Main Title in Cursive / Editorial Serif Font (Interactive Hover Flash + Jump) -->
+            <!-- Main Title in One Line with Google Font Caveat -->
             <div class="inline-block p-4 -ml-4 rounded-3xl hover:bg-black/5 dark:hover:bg-white/5 transition-all duration-300 transform hover:-translate-y-1.5 hover-flash cursor-default mb-2">
-              <h1 class="text-6xl sm:text-7xl lg:text-8xl font-serif italic font-normal tracking-tight text-[#1e1a14] dark:text-[#f5efe6] leading-[1.05]">
-                Saiteja <br/>
-                <span class="font-cursive not-italic text-[#415b06] dark:text-[#8bab2a] font-bold">Athmakuri</span>
+              <h1 class="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-caveat font-bold tracking-normal text-[#1e1a14] dark:text-[#f5efe6] leading-tight whitespace-nowrap">
+                Saiteja <span class="text-[#415b06] dark:text-[#8bab2a]">Athmakuri</span>
               </h1>
             </div>
             
@@ -126,4 +125,4 @@ import { CommonModule } from '@angular/common';
     </section>
   `
 })
-export class HeroComponent {}
+export class HeroComponent { }

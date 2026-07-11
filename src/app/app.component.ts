@@ -29,15 +29,10 @@ interface SearchItem {
       <!-- Top Navigation Header -->
       <header class="fixed top-0 left-0 right-0 z-[100] py-4 transition-all">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between">
-          <!-- Left Logo / Brand with Animated Glow & Floating Effect -->
-          <a href="#home" class="flex items-center gap-2.5 font-serif italic text-xl font-bold tracking-tight text-[#1e1a14] dark:text-[#f5efe6] hover:text-[#415b06] dark:hover:text-[#8bab2a] transition-colors group">
-            <div class="relative flex items-center justify-center">
-              <!-- Animated Pulsing Lime-Green Halo Glow -->
-              <div class="absolute -inset-1.5 rounded-full bg-gradient-to-r from-[#84cc16]/50 via-[#a3e635]/70 to-[#65a30d]/50 blur-md opacity-75 group-hover:opacity-100 animate-pulse transition duration-500"></div>
-              <!-- Authentic SA Logo with Neon Drop Shadow -->
-              <img src="assets/favicon.png?v=6" alt="SA Logo" class="relative w-10 h-8 object-contain drop-shadow-[0_0_10px_rgba(163,230,53,0.75)] transition-all duration-500 group-hover:scale-110 group-hover:rotate-2">
-            </div>
-            <span class="tracking-wider">Saiteja</span>
+          <!-- Left Logo / Brand -->
+          <a href="#home" class="flex items-center gap-2.5 font-serif italic text-xl font-bold tracking-tight text-[#1e1a14] dark:text-[#f5efe6] hover:text-[#415b06] dark:hover:text-[#8bab2a] transition-colors">
+            <img src="assets/favicon.png?v=8" alt="SA Logo" class="w-10 h-8 object-contain drop-shadow-md transition-transform duration-300 hover:scale-110">
+            <span>Saiteja</span>
           </a>
 
           <!-- Center Pill Nav (Desktop) with Dynamic Active Section Highlighting -->

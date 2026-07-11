@@ -1,18 +1,18 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none">
   <defs>
-    <!-- Ultra-Sleek Precision Metallic Lime & Olive Green Gradients -->
+    <!-- Rich Metallic Lime & Olive Green Gradients matching uploaded 3D logo -->
     <linearGradient id="greenMain" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#ecfccb" />
-      <stop offset="25%" stop-color="#a3e635" />
+      <stop offset="0%" stop-color="#d9f99d" />
+      <stop offset="28%" stop-color="#a3e635" />
       <stop offset="65%" stop-color="#65a30d" />
       <stop offset="100%" stop-color="#3f6212" />
     </linearGradient>
 
-    <linearGradient id="greenHighlight" x1="0%" y1="100%" x2="100%" y2="0%">
+    <linearGradient id="greenBright" x1="0%" y1="100%" x2="100%" y2="0%">
       <stop offset="0%" stop-color="#4d7c0f" />
       <stop offset="45%" stop-color="#84cc16" />
       <stop offset="85%" stop-color="#bef264" />
-      <stop offset="100%" stop-color="#ffffff" />
+      <stop offset="100%" stop-color="#f7fee7" />
     </linearGradient>
 
     <linearGradient id="greenBlade" x1="0%" y1="50%" x2="100%" y2="30%">
@@ -24,21 +24,17 @@
     <!-- Crisp ambient drop shadow -->
     <filter id="logoShadow" x="-20%" y="-20%" width="140%" height="140%">
       <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#000000" flood-opacity="0.85" />
-      <feDropShadow dx="0" dy="1" stdDeviation="1.5" flood-color="#84cc16" flood-opacity="0.45" />
+      <feDropShadow dx="0" dy="1" stdDeviation="1.5" flood-color="#84cc16" flood-opacity="0.4" />
     </filter>
   </defs>
 
-  <!-- Transparent Background - Elevated Precision SA Logo -->
+  <!-- Transparent Background - Exact Geometric SA Logo with Corrected Proportions (Small Upper Curve, Larger Lower Curve) -->
   <g filter="url(#logoShadow)">
-    <!-- IMPROVISED SLEEK LETTER S: Precision supercar-badge bevel geometry with dynamic forward angles -->
-    <path d="M 98 42 L 36 42 L 20 62 L 52 62 C 60 62 66 66 66 74 C 66 82 60 86 52 86 L 36 86 C 22 86 14 96 14 112 L 14 124 C 14 144 30 156 52 156 L 102 156 L 118 136 L 68 136 C 58 136 52 130 52 122 C 52 114 58 110 68 110 L 86 110 C 104 110 114 98 114 80 L 114 66 C 114 48 106 42 98 42 Z" fill="url(#greenMain)"/>
-    <!-- Crisp 3D Top Edge Bevel Highlight on S -->
-    <path d="M 98 42 L 36 42 L 20 62 L 32 62 L 44 48 L 94 48 Z" fill="url(#greenHighlight)" opacity="0.85"/>
-    <!-- Crisp 3D Bottom Edge Bevel Highlight on S -->
-    <path d="M 102 156 L 52 156 L 38 156 L 50 142 L 96 142 Z" fill="url(#greenHighlight)" opacity="0.75"/>
+    <!-- Letter S: Compact upper curve & wider/larger lower curve -->
+    <path d="M 94 48 L 44 48 C 30 48 22 58 22 70 C 22 82 30 92 44 92 L 68 92 C 84 92 96 102 96 118 C 96 136 82 152 64 152 L 14 152 L 24 168 L 68 168 C 98 168 116 148 116 118 C 116 94 98 76 72 76 L 44 76 C 36 76 34 72 34 68 C 34 64 38 62 46 62 L 86 62 Z" fill="url(#greenMain)"/>
     
     <!-- Letter A Peak & Right Stance -->
-    <path d="M 132 38 L 104 100 L 122 100 L 132 76 L 142 100 L 160 100 Z" fill="url(#greenHighlight)"/>
+    <path d="M 132 38 L 104 100 L 122 100 L 132 76 L 142 100 L 160 100 Z" fill="url(#greenBright)"/>
     
     <!-- Lower Right Leg of A below the blade cut -->
     <path d="M 148 126 L 168 162 L 188 162 L 162 118 Z" fill="url(#greenMain)"/>

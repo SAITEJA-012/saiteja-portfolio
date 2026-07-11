@@ -9,10 +9,12 @@ export default {
     theme: {
         extend: {
             fontFamily: {
-                sans: ['"Sora"', 'sans-serif'],
+                sans: ['"Inter"', 'sans-serif'],
+                heading: ['"Space Grotesk"', 'sans-serif'],
+                caveat: ['"Caveat"', 'cursive'],
                 mono: ['"JetBrains Mono"', 'monospace'],
-                cursive: ['"Dancing Script"', '"Playfair Display"', 'cursive'],
-                serif: ['"Bodoni Moda"', '"Playfair Display"', 'serif'],
+                cursive: ['"Dancing Script"', 'cursive'],
+                serif: ['"Space Grotesk"', 'sans-serif'],
             },
             colors: {
                 primary: 'var(--primary-color)',

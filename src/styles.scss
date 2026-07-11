@@ -150,40 +150,16 @@ body {
 }
 
 /* Interactive Hover Flash Effect (Sweeping Shine from Start to End) */
-.hover-flash {
-    position: relative;
-    overflow: hidden;
-}
-.hover-flash::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 60%;
-    height: 100%;
-    background: linear-gradient(
-        90deg,
-        transparent 0%,
-        rgba(255, 255, 255, 0.45) 50%,
-        transparent 100%
-    );
-    transform: skewX(-25deg);
-    transition: left 0.7s cubic-bezier(0.16, 1, 0.3, 1);
-    pointer-events: none;
-    z-index: 20;
-}
-.p-dark .hover-flash::before {
-    background: linear-gradient(
-        90deg,
-        transparent 0%,
-        rgba(255, 255, 255, 0.22) 50%,
-        transparent 100%
-    );
-}
-.hover-flash:hover::before {
-    left: 150%;
-}
+/* Removed lighting effect - sleek Apple Store style subtle lift only */
 
 .font-caveat {
     font-family: 'Caveat', cursive !important;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6, .font-heading {
+    font-family: 'Space Grotesk', sans-serif;
 }

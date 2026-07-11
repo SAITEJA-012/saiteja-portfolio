@@ -18,18 +18,14 @@ import { CommonModule } from '@angular/common';
               <span>AI ENTHUSIAST</span>
             </div>
             
-            <!-- Main Title in One Line with Google Font Caveat -->
-            <div class="inline-block p-4 -ml-4 rounded-3xl hover:bg-black/5 dark:hover:bg-white/5 transition-all duration-300 transform hover:-translate-y-1.5 hover-flash cursor-default mb-2">
-              <h1 class="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-caveat font-bold tracking-normal text-[#1e1a14] dark:text-[#f5efe6] leading-tight whitespace-nowrap">
-                Saiteja <span class="text-[#415b06] dark:text-[#8bab2a]">Athmakuri</span>
-              </h1>
-            </div>
+            <!-- Main Title in One Line with Google Font Caveat (No Hover Background Box) -->
+            <h1 class="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-caveat font-bold tracking-normal text-[#1e1a14] dark:text-[#f5efe6] leading-tight whitespace-nowrap mb-4">
+              Saiteja <span class="text-[#415b06] dark:text-[#8bab2a]">Athmakuri</span>
+            </h1>
             
-            <!-- Subtitle / Role (Interactive Hover Flash + Jump) -->
-            <div class="inline-block p-3 -ml-3 rounded-2xl hover:bg-black/5 dark:hover:bg-white/5 transition-all duration-300 transform hover:-translate-y-1 hover-flash cursor-default mb-6">
-              <div class="text-2xl sm:text-3xl font-bold text-[#1e1a14] dark:text-[#f5efe6] tracking-tight">
-                Database Engineer &amp; Full Stack Developer
-              </div>
+            <!-- Subtitle / Role (No Hover Background Box) -->
+            <div class="text-2xl sm:text-3xl font-bold text-[#1e1a14] dark:text-[#f5efe6] tracking-tight mb-6">
+              Database Engineer &amp; Full Stack Developer
             </div>
 
             <p class="text-base sm:text-lg text-[#4a3e2e] dark:text-[#d6cab8] max-w-2xl font-normal leading-relaxed mb-8">

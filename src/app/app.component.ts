@@ -247,7 +247,7 @@ interface SearchItem {
   `]
 })
 export class AppComponent implements OnInit {
-  isDarkMode = true;
+  isDarkMode = false;
   scrollProgress = 0;
   isSearchOpen = false;
   isMenuOpen = false;
@@ -347,11 +347,12 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     if (isPlatformBrowser(this.platformId)) {
       const savedTheme = localStorage.getItem('theme');
-      if (savedTheme === 'light') {
+      if (savedTheme === 'dark') {
+        this.isDarkMode = true;
+        document.documentElement.classList.add('p-dark', 'dark');
+      } else {
         this.isDarkMode = false;
         document.documentElement.classList.remove('p-dark', 'dark');
-      } else {
-        document.documentElement.classList.add('p-dark', 'dark');
       }
 
       this.calculateScroll();

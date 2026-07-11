@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <style>
+    @keyframes pulseAura {
+      0% { transform: scale(0.92) rotate(0deg); opacity: 0.55; }
+      50% { transform: scale(1.08) rotate(180deg); opacity: 0.95; }
+      100% { transform: scale(0.92) rotate(360deg); opacity: 0.55; }
+    }
+    .aura {
+      transform-origin: 100px 100px;
+      animation: pulseAura 4s infinite ease-in-out;
+    }
+  </style>
+  <defs>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#a3e635" stop-opacity="0.85"/>
+      <stop offset="60%" stop-color="#65a30d" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#3f6212" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <!-- Rotating & Pulsing Lime-Green Aura -->
+  <circle class="aura" cx="100" cy="100" r="80" fill="url(#glow)" />
+  <!-- Embedded Authentic Uploaded SA Logo -->
+  <image href="favicon.png" x="15" y="25" width="170" height="150" preserveAspectRatio="xMidYMid meet" />
+</svg>

@@ -31,7 +31,7 @@ interface SearchItem {
         <div class="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between">
           <!-- Left Logo / Brand -->
           <a href="#home" class="flex items-center gap-2.5 font-serif italic text-xl font-bold tracking-tight text-[#1e1a14] dark:text-[#f5efe6] hover:text-[#415b06] dark:hover:text-[#8bab2a] transition-colors">
-            <img src="assets/favicon.svg?v=4" alt="SA Logo" class="w-9 h-9 drop-shadow-md transition-transform duration-300 hover:scale-110">
+            <img src="assets/logo.png?v=5" alt="SA Logo" class="w-10 h-8 object-contain drop-shadow-md transition-transform duration-300 hover:scale-110">
             <span>Saiteja</span>
           </a>
 

@@ -28,8 +28,8 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
                 PROFILE
               </div>
               <h3 class="text-3xl sm:text-4xl font-heading mb-1 tracking-tight">
-                <span class="font-extrabold text-[#1e1a14] dark:text-[#f5efe6]">SAITEJA</span>
-                <span class="font-semibold text-[#415b06] dark:text-[#8bab2a] ml-2">ATHMAKURI</span>
+                <span class="font-extrabold text-[#1e1a14] dark:text-[#f5efe6]">Saiteja</span>
+                <span class="font-semibold text-[#415b06] dark:text-[#8bab2a] ml-2">Athmakuri</span>
               </h3>
               <div class="text-sm font-bold text-[#a89070] dark:text-[#b9ab95] mb-4">
                 Database Engineer &amp; Full Stack Developer

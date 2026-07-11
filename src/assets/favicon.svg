@@ -1,46 +1,62 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 180" fill="none">
   <defs>
-    <!-- Rich Metallic Lime & Olive Green Gradients -->
-    <linearGradient id="greenMain" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#d9f99d" />
-      <stop offset="28%" stop-color="#a3e635" />
+    <!-- Top Face Satin Metallic Lime Green Gradient -->
+    <linearGradient id="faceGreen" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ecfccb" />
+      <stop offset="25%" stop-color="#a3e635" />
       <stop offset="65%" stop-color="#65a30d" />
-      <stop offset="100%" stop-color="#3f6212" />
+      <stop offset="100%" stop-color="#4d7c0f" />
     </linearGradient>
 
-    <linearGradient id="greenBright" x1="0%" y1="100%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#4d7c0f" />
-      <stop offset="45%" stop-color="#84cc16" />
-      <stop offset="85%" stop-color="#bef264" />
-      <stop offset="100%" stop-color="#f7fee7" />
+    <!-- 3D Extruded Side Wall / Bevel Depth Gradient -->
+    <linearGradient id="depthGreen" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3f6212" />
+      <stop offset="60%" stop-color="#1a2e05" />
+      <stop offset="100%" stop-color="#0d1802" />
     </linearGradient>
 
-    <linearGradient id="greenBlade" x1="0%" y1="50%" x2="100%" y2="30%">
-      <stop offset="0%" stop-color="#84cc16" />
+    <!-- Specular Highlight Edge -->
+    <linearGradient id="edgeGlow" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#65a30d" />
       <stop offset="50%" stop-color="#bef264" />
       <stop offset="100%" stop-color="#ffffff" />
     </linearGradient>
 
-    <!-- Crisp ambient drop shadow -->
-    <filter id="logoShadow" x="-20%" y="-20%" width="140%" height="140%">
-      <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#000000" flood-opacity="0.85" />
-      <feDropShadow dx="0" dy="1" stdDeviation="1.5" flood-color="#84cc16" flood-opacity="0.4" />
+    <!-- High-end ambient occlusion drop shadow -->
+    <filter id="premiumShadow" x="-25%" y="-25%" width="150%" height="150%">
+      <feDropShadow dx="0" dy="5" stdDeviation="4" flood-color="#000000" flood-opacity="0.9" />
+      <feDropShadow dx="0" dy="1" stdDeviation="2" flood-color="#84cc16" flood-opacity="0.35" />
     </filter>
   </defs>
 
-  <!-- Transparent Background - Perfectly Equal S Proportions -->
-  <g filter="url(#logoShadow)">
-    <!-- Letter S: Exactly Equal & Symmetric Upper Loop (y: 36-96) and Lower Loop (y: 96-156) -->
-    <path d="M 96 36 L 46 36 C 26 36 14 48 14 66 C 14 84 26 96 46 96 L 74 96 C 94 96 106 108 106 126 C 106 144 94 156 74 156 L 16 156 L 28 174 L 74 174 C 108 174 126 154 126 126 C 126 98 108 78 74 78 L 46 78 C 34 78 30 74 30 66 C 30 58 34 54 46 54 L 86 54 Z" fill="url(#greenMain)"/>
-    
-    <!-- Letter A Peak & Right Stance -->
-    <path d="M 134 38 L 104 100 L 122 100 L 134 76 L 144 100 L 162 100 Z" fill="url(#greenBright)"/>
-    
-    <!-- Lower Right Leg of A below the blade cut -->
-    <path d="M 148 126 L 168 162 L 188 162 L 162 118 Z" fill="url(#greenMain)"/>
-    <path d="M 112 140 L 122 162 L 140 162 L 130 140 Z" fill="url(#greenMain)"/>
+  <!-- Transparent Background - Exact 3D Extruded Finishing of Uploaded SA Logo -->
+  <g filter="url(#premiumShadow)">
+    <!-- 1. 3D EXTRUDED SIDE WALLS & DEPTH LAYER (Offset down and right for realistic 3D thickness) -->
+    <g transform="translate(2.5, 4.5)" fill="url(#depthGreen)">
+      <!-- S Depth -->
+      <path d="M 104 32 L 50 32 C 26 32 12 46 12 66 C 12 86 26 98 48 98 L 74 98 C 92 98 102 108 102 124 C 102 140 92 150 74 150 L 14 150 L 26 168 L 76 168 C 108 168 126 150 126 124 C 126 96 108 78 74 78 L 48 78 C 34 78 30 72 30 66 C 30 58 34 52 48 52 L 92 52 Z"/>
+      <!-- A Peak & Right Leg Depth -->
+      <path d="M 136 32 L 102 102 L 122 102 L 136 72 L 146 102 L 166 102 Z"/>
+      <path d="M 152 128 L 172 168 L 194 168 L 168 116 Z"/>
+      <path d="M 114 140 L 126 168 L 146 168 L 134 140 Z"/>
+      <!-- Swoosh Blade Depth -->
+      <path d="M 98 152 C 124 134 154 114 196 94 C 166 106 136 124 106 166 Z"/>
+    </g>
 
-    <!-- Signature Dynamic Lime Green & Silver Slash Swoosh / Blade cutting across A -->
-    <path d="M 96 150 C 120 134 148 116 186 98 C 158 108 132 124 104 162 Z" fill="url(#greenBlade)"/>
+    <!-- 2. FRONT SATIN METALLIC GREEN FACE LAYER (Sharp geometric precision) -->
+    <g fill="url(#faceGreen)">
+      <!-- S Face: Exact uploaded shape with equal loop geometry & angled cuts -->
+      <path d="M 104 32 L 50 32 C 26 32 12 46 12 66 C 12 86 26 98 48 98 L 74 98 C 92 98 102 108 102 124 C 102 140 92 150 74 150 L 14 150 L 26 168 L 76 168 C 108 168 126 150 126 124 C 126 96 108 78 74 78 L 48 78 C 34 78 30 72 30 66 C 30 58 34 52 48 52 L 92 52 Z"/>
+      <!-- A Peak & Right Leg Face -->
+      <path d="M 136 32 L 102 102 L 122 102 L 136 72 L 146 102 L 166 102 Z"/>
+      <path d="M 152 128 L 172 168 L 194 168 L 168 116 Z"/>
+      <path d="M 114 140 L 126 168 L 146 168 L 134 140 Z"/>
+      <!-- Dynamic Swoosh Blade Face -->
+      <path d="M 98 152 C 124 134 154 114 196 94 C 166 106 136 124 106 166 Z" fill="url(#edgeGlow)"/>
+    </g>
+
+    <!-- 3. SPECULAR BEVEL EDGE HIGHLIGHTS (Finishing polish along top edges) -->
+    <path d="M 104 32 L 50 32 C 26 32 18 36 14 44" stroke="#ffffff" stroke-width="2" stroke-linecap="round" opacity="0.6"/>
+    <path d="M 136 32 L 146 102" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" opacity="0.5"/>
   </g>
 </svg>

@@ -18,9 +18,10 @@ import { CommonModule } from '@angular/common';
               <span>AI ENTHUSIAST</span>
             </div>
             
-            <!-- Main Title in One Line with Google Font Caveat (No Hover Background Box) -->
-            <h1 class="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-caveat font-bold tracking-normal text-[#1e1a14] dark:text-[#f5efe6] leading-tight whitespace-nowrap mb-4">
-              Saiteja <span class="text-[#415b06] dark:text-[#8bab2a]">Athmakuri</span>
+            <!-- Main Title in One Line with Space Grotesk (SAITEJA ExtraBold + ATHMAKURI SemiBold) -->
+            <h1 class="text-4xl sm:text-6xl md:text-7xl lg:text-8xl tracking-tight leading-tight whitespace-nowrap mb-4 font-heading">
+              <span class="font-extrabold text-[#1e1a14] dark:text-[#f5efe6]">SAITEJA</span>
+              <span class="font-semibold text-[#415b06] dark:text-[#8bab2a] ml-2 sm:ml-4">ATHMAKURI</span>
             </h1>
             
             <!-- Subtitle / Role (No Hover Background Box) -->

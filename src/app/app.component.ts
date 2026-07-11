@@ -29,9 +29,10 @@ interface SearchItem {
       <!-- Top Navigation Header -->
       <header class="fixed top-0 left-0 right-0 z-[100] py-4 transition-all">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between">
-          <!-- Left Logo / Brand (Replaced JARVIS [SAITEJA] with clean cursive name) -->
-          <a href="#home" class="font-serif italic text-xl font-bold tracking-tight text-[#1e1a14] dark:text-[#f5efe6] hover:text-[#415b06] dark:hover:text-[#8bab2a] transition-colors">
-            Saiteja
+          <!-- Left Logo / Brand -->
+          <a href="#home" class="flex items-center gap-2.5 font-serif italic text-xl font-bold tracking-tight text-[#1e1a14] dark:text-[#f5efe6] hover:text-[#415b06] dark:hover:text-[#8bab2a] transition-colors">
+            <img src="assets/favicon.svg" alt="SA Logo" class="w-9 h-9 drop-shadow-md transition-transform duration-300 hover:scale-110">
+            <span>Saiteja</span>
           </a>
 
           <!-- Center Pill Nav (Desktop) with Dynamic Active Section Highlighting -->

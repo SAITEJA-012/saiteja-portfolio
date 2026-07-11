@@ -29,10 +29,9 @@ interface SearchItem {
       <!-- Top Navigation Header -->
       <header class="fixed top-0 left-0 right-0 z-[100] py-4 transition-all">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between">
-          <!-- Left Logo / Brand -->
-          <a href="#home" class="flex items-center gap-2.5 font-serif italic text-xl font-bold tracking-tight text-[#1e1a14] dark:text-[#f5efe6] hover:text-[#415b06] dark:hover:text-[#8bab2a] transition-colors">
-            <img src="assets/favicon.png?v=8" alt="SA Logo" class="w-10 h-8 object-contain drop-shadow-md transition-transform duration-300 hover:scale-110">
-            <span>Saiteja</span>
+          <!-- Left Logo / Brand (Standalone SA Logo linking to #home) -->
+          <a href="#home" title="SA | Home" class="flex items-center transition-all duration-300 hover:scale-105 group">
+            <img src="assets/favicon.png?v=8" alt="SA Logo" class="w-14 h-10 sm:w-16 sm:h-11 object-contain drop-shadow-md transition-all duration-300 group-hover:drop-shadow-[0_0_12px_rgba(163,230,53,0.5)]">
           </a>
 
           <!-- Center Pill Nav (Desktop) with Dynamic Active Section Highlighting -->

@@ -1,41 +1,40 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" fill="none">
   <defs>
-    <!-- Ultra-sharp vibrant cyan to neon purple/gold gradients -->
-    <linearGradient id="neonS" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#38bdf8" />
-      <stop offset="50%" stop-color="#818cf8" />
-      <stop offset="100%" stop-color="#c084fc" />
+    <!-- Radiant Polished Gold/Yellow Gradients -->
+    <linearGradient id="goldS" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fef08a" />
+      <stop offset="45%" stop-color="#eab308" />
+      <stop offset="100%" stop-color="#a16207" />
     </linearGradient>
-    <linearGradient id="neonA" x1="0%" y1="100%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#f43f5e" />
-      <stop offset="50%" stop-color="#a855f7" />
-      <stop offset="100%" stop-color="#38bdf8" />
+    <linearGradient id="goldA" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#fde047" />
+      <stop offset="55%" stop-color="#d97706" />
+      <stop offset="100%" stop-color="#fef08a" />
     </linearGradient>
-    <linearGradient id="goldCore" x1="0%" y1="0%" x2="100%" y2="100%">
+    <linearGradient id="champagneHighlight" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" stop-color="#ffffff" />
-      <stop offset="40%" stop-color="#fef08a" />
-      <stop offset="100%" stop-color="#eab308" />
+      <stop offset="50%" stop-color="#fef9c3" />
+      <stop offset="100%" stop-color="#facc15" />
     </linearGradient>
 
-    <!-- Deep contrast shadow for maximum sharpness on any browser tab -->
-    <filter id="ultraSharp" x="-30%" y="-30%" width="160%" height="160%">
+    <!-- Crisp ambient drop shadow for sharpness on dark and light browser tabs -->
+    <filter id="goldSharp" x="-30%" y="-30%" width="160%" height="160%">
       <feDropShadow dx="0" dy="2" stdDeviation="2.5" flood-color="#000000" flood-opacity="0.85" />
-      <feDropShadow dx="0" dy="0" stdDeviation="4" flood-color="#818cf8" flood-opacity="0.45" />
+      <feDropShadow dx="0" dy="0" stdDeviation="3.5" flood-color="#eab308" flood-opacity="0.4" />
     </filter>
   </defs>
 
-  <g filter="url(#ultraSharp)">
-    <!-- Architectural Letter A (Back / Interlocking Right) -->
-    <path d="M 52 98 L 74 20 L 98 98" stroke="url(#neonA)" stroke-width="15" stroke-linecap="round" stroke-linejoin="round"/>
-    <!-- Inner bright crisp core for A -->
-    <path d="M 52 98 L 74 20 L 98 98" stroke="#ffffff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" opacity="0.9"/>
+  <g filter="url(#goldSharp)">
+    <!-- Architectural Letter A (Interlocking Right) -->
+    <path d="M 52 98 L 74 20 L 98 98" stroke="url(#goldA)" stroke-width="15" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M 52 98 L 74 20 L 98 98" stroke="#ffffff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.9"/>
     <!-- Crossbar of A -->
-    <path d="M 60 72 L 90 72" stroke="url(#neonA)" stroke-width="12" stroke-linecap="round"/>
+    <path d="M 60 72 L 90 72" stroke="url(#goldA)" stroke-width="12" stroke-linecap="round"/>
     <path d="M 62 72 L 88 72" stroke="#ffffff" stroke-width="3" stroke-linecap="round" opacity="0.9"/>
 
-    <!-- High-Impact Letter S (Front / Interlocking Left) -->
-    <path d="M 58 32 C 40 28 20 34 20 48 C 20 64 48 66 58 72 C 68 78 72 88 64 98 C 54 108 28 104 18 94" stroke="url(#neonS)" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/>
-    <!-- Crisp inner core for S -->
-    <path d="M 58 32 C 40 28 20 34 20 48 C 20 64 48 66 58 72 C 68 78 72 88 64 98 C 54 108 28 104 18 94" stroke="url(#goldCore)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+    <!-- High-Impact Letter S (Interlocking Left) -->
+    <path d="M 58 32 C 40 28 20 34 20 48 C 20 64 48 66 58 72 C 68 78 72 88 64 98 C 54 108 28 104 18 94" stroke="url(#goldS)" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/>
+    <!-- Crisp Champagne Gold highlight core for S -->
+    <path d="M 58 32 C 40 28 20 34 20 48 C 20 64 48 66 58 72 C 68 78 72 88 64 98 C 54 108 28 104 18 94" stroke="url(#champagneHighlight)" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
   </g>
 </svg>

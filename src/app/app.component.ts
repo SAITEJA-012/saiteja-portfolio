@@ -75,15 +75,12 @@ interface SearchItem {
 
       <!-- Footer -->
       <footer class="border-t border-[#415b06]/15 dark:border-[#a89070]/15 py-10 bg-[#faf6f0]/60 dark:bg-[#14110d]/60 backdrop-blur-md relative z-10 text-xs text-[#a89070]">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div class="font-serif italic font-bold text-[#1e1a14] dark:text-[#f5efe6]">Saiteja Athmakuri</div>
-          <div class="text-center sm:text-right">
-            <div>&copy; 2026 Saiteja Athmakuri. Crafted with Angular.</div>
-            <div class="mt-1 flex justify-center sm:justify-end gap-4 text-[11px]">
-              <a href="https://linkedin.com/in/saitejaathmakuri/" target="_blank" class="hover:text-[#415b06] dark:hover:text-[#8bab2a] transition-colors">LinkedIn</a>
-              <a href="mailto:saitezathmakuri2003@gmail.com" class="hover:text-[#415b06] dark:hover:text-[#8bab2a] transition-colors">Email</a>
-              <a href="tel:+918309229402" class="hover:text-[#415b06] dark:hover:text-[#8bab2a] transition-colors">Phone</a>
-            </div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 flex flex-col items-center justify-center text-center gap-2">
+          <div>&copy; 2026 Saiteja Athmakuri. Crafted with Angular.</div>
+          <div class="flex justify-center gap-5 text-[11px]">
+            <a href="https://linkedin.com/in/saitejaathmakuri/" target="_blank" class="hover:text-[#415b06] dark:hover:text-[#8bab2a] transition-colors font-medium">LinkedIn</a>
+            <a href="mailto:saitezathmakuri2003@gmail.com" class="hover:text-[#415b06] dark:hover:text-[#8bab2a] transition-colors font-medium">Email</a>
+            <a href="tel:+918309229402" class="hover:text-[#415b06] dark:hover:text-[#8bab2a] transition-colors font-medium">Phone</a>
           </div>
         </div>
       </footer>

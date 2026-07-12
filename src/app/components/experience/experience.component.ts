@@ -62,7 +62,7 @@ import { CommonModule } from '@angular/common';
                 <span>QSpiders / JSpiders</span>
                 <span class="text-xs font-normal text-[#a89070] dark:text-[#b9ab95]">&bull; Training Program</span>
               </h3>
-              <span class="text-xs font-mono px-3.5 py-1.5 bg-[#faf6f0]/80 dark:bg-[#0e0b09]/80 border border-[#415b06]/15 text-[#1e1a14] dark:text-[#f5efe6] font-bold rounded-full w-fit mt-2 md:mt-0">Feb 2025 &ndash; Ongoing</span>
+              <span class="text-xs font-mono px-3.5 py-1.5 bg-[#faf6f0]/80 dark:bg-[#0e0b09]/80 border border-[#415b06]/15 text-[#1e1a14] dark:text-[#f5efe6] font-bold rounded-full w-fit mt-2 md:mt-0">Feb 2025 &ndash; Oct 2025</span>
             </div>
             <div class="text-sm font-bold text-[#1e1a14] dark:text-[#f5efe6] mb-3">Java Full Stack Development Trainee</div>
             <p class="text-xs sm:text-sm text-[#4a3e2e] dark:text-[#d6cab8] leading-relaxed">

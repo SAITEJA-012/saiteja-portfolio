@@ -78,7 +78,7 @@ interface SearchItem {
         <div class="max-w-7xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
           <div class="font-serif italic font-bold text-[#1e1a14] dark:text-[#f5efe6]">Saiteja Athmakuri</div>
           <div class="text-center sm:text-right">
-            <div>&copy; 2026 Saiteja Athmakuri. Crafted with Angular &amp; Ameya Jarvis Warm Dark Oat Theme.</div>
+            <div>&copy; 2026 Saiteja Athmakuri. Crafted with Angular.</div>
             <div class="mt-1 flex justify-center sm:justify-end gap-4 text-[11px]">
               <a href="https://linkedin.com/in/saitejaathmakuri/" target="_blank" class="hover:text-[#415b06] dark:hover:text-[#8bab2a] transition-colors">LinkedIn</a>
               <a href="mailto:saitezathmakuri2003@gmail.com" class="hover:text-[#415b06] dark:hover:text-[#8bab2a] transition-colors">Email</a>

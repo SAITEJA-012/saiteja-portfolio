@@ -18,8 +18,8 @@ import { CommonModule } from '@angular/common';
               <span>AI ENTHUSIAST</span>
             </div>
             
-            <!-- Main Title in One Line with Refined Space Grotesk Weights and Size -->
-            <h1 class="text-3xl sm:text-5xl md:text-6xl lg:text-7xl tracking-tight leading-tight whitespace-nowrap mb-4 font-heading">
+            <!-- Main Title in One Line with Inter Font -->
+            <h1 class="text-3xl sm:text-5xl md:text-6xl lg:text-7xl tracking-tight leading-tight whitespace-nowrap mb-4 font-sans">
               <span class="font-semibold text-[#1e1a14] dark:text-[#f5efe6]">Saiteja</span>
               <span class="font-normal text-[#415b06] dark:text-[#8bab2a] ml-2 sm:ml-3">Athmakuri</span>
             </h1>

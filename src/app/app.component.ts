@@ -41,7 +41,7 @@ interface SearchItem {
             <a href="#experience" (click)="setActive('experience')" [ngClass]="activeSection === 'experience' ? 'bg-[#415b06]/15 dark:bg-[#8bab2a]/20 text-[#415b06] dark:text-[#8bab2a] border border-[#415b06]/30 dark:border-[#8bab2a]/40 shadow-sm font-bold' : 'text-[#a89070] hover:text-[#1e1a14] dark:hover:text-[#f5efe6] border border-transparent'" class="px-5 py-2 rounded-full text-xs font-bold tracking-widest uppercase transition-all">Experience</a>
             <a href="#projects" (click)="setActive('projects')" [ngClass]="activeSection === 'projects' ? 'bg-[#415b06]/15 dark:bg-[#8bab2a]/20 text-[#415b06] dark:text-[#8bab2a] border border-[#415b06]/30 dark:border-[#8bab2a]/40 shadow-sm font-bold' : 'text-[#a89070] hover:text-[#1e1a14] dark:hover:text-[#f5efe6] border border-transparent'" class="px-5 py-2 rounded-full text-xs font-bold tracking-widest uppercase transition-all">Projects</a>
             <a href="#contact" (click)="setActive('contact')" [ngClass]="activeSection === 'contact' ? 'bg-[#415b06]/15 dark:bg-[#8bab2a]/20 text-[#415b06] dark:text-[#8bab2a] border border-[#415b06]/30 dark:border-[#8bab2a]/40 shadow-sm font-bold' : 'text-[#a89070] hover:text-[#1e1a14] dark:hover:text-[#f5efe6] border border-transparent'" class="px-5 py-2 rounded-full text-xs font-bold tracking-widest uppercase transition-all">Contact</a>
-            <a href="assets/Saiteja_Developer.pdf" target="_blank" class="px-5 py-2 rounded-full text-xs font-bold tracking-widest text-[#a89070] hover:text-[#415b06] dark:hover:text-[#8bab2a] uppercase transition-all flex items-center gap-1 border border-transparent"><i class="pi pi-arrow-up-right text-[10px]"></i>Resume</a>
+            <a href="assets/Saiteja_Database_Developer.pdf" target="_blank" class="px-5 py-2 rounded-full text-xs font-bold tracking-widest text-[#a89070] hover:text-[#415b06] dark:hover:text-[#8bab2a] uppercase transition-all flex items-center gap-1 border border-transparent"><i class="pi pi-arrow-up-right text-[10px]"></i>Resume</a>
           </nav>
 
           <!-- Right Actions -->
@@ -121,7 +121,7 @@ interface SearchItem {
           <i class="pi pi-envelope text-[10px] text-[#a89070]"></i>
         </a>
         <div class="border-t border-[#415b06]/10 dark:border-[#a89070]/10 mt-1 pt-1.5">
-          <a href="assets/Saiteja_Developer.pdf" target="_blank" (click)="closeMenu()" class="flex items-center justify-between px-3.5 py-2 rounded-2xl text-xs font-semibold bg-[#415b06]/10 text-[#415b06] dark:text-[#8bab2a] hover:bg-[#415b06]/20 transition-all">
+          <a href="assets/Saiteja_Database_Developer.pdf" target="_blank" (click)="closeMenu()" class="flex items-center justify-between px-3.5 py-2 rounded-2xl text-xs font-semibold bg-[#415b06]/10 text-[#415b06] dark:text-[#8bab2a] hover:bg-[#415b06]/20 transition-all">
             <span class="flex items-center gap-2">
               <i class="pi pi-file-pdf"></i>
               <span>Download Resume</span>

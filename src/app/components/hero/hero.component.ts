@@ -40,7 +40,7 @@ import { CommonModule } from '@angular/common';
                  class="px-7 py-3.5 bg-[#415b06] hover:bg-[#557210] dark:bg-[#6a8c1a] dark:hover:bg-[#8bab2a] text-[#faf6f0] font-bold text-sm rounded-xl shadow-lg transition-all duration-300 transform hover:-translate-y-0.5">
                 <span>View Projects</span>
               </a>
-              <a href="assets/Saiteja_Developer.pdf" target="_blank" download="Athmakuri_Saiteja_Resume.pdf" 
+              <a href="assets/Saiteja_Database_Developer.pdf" target="_blank" download="Saiteja_Database_Developer.pdf" 
                  class="px-7 py-3.5 bg-transparent hover:bg-[#415b06]/10 text-[#1e1a14] dark:text-[#f5efe6] border-2 border-[#415b06]/30 dark:border-[#a89070]/30 font-bold rounded-xl transition-all duration-300 text-sm">
                 <span>Download Resume</span>
               </a>

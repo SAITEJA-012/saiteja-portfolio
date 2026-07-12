@@ -124,7 +124,7 @@ interface SearchItem {
           <a href="assets/Saiteja_Database_Developer.pdf" target="_blank" (click)="closeMenu()" class="flex items-center justify-between px-3.5 py-2 rounded-2xl text-xs font-semibold bg-[#415b06]/10 text-[#415b06] dark:text-[#8bab2a] hover:bg-[#415b06]/20 transition-all">
             <span class="flex items-center gap-2">
               <i class="pi pi-file-pdf"></i>
-              <span>Download Resume</span>
+              <span>Resume</span>
             </span>
             <i class="pi pi-download text-[10px]"></i>
           </a>

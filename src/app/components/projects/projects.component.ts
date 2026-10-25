@@ -1,195 +1,83 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+interface Project {
+  title: string;
+  tagline: string;
+  category: string;
+  metric: string;
+  description: string;
+  tech: string[];
+  githubUrl: string;
+}
+
 @Component({
   selector: 'app-projects',
   standalone: true,
   imports: [CommonModule],
   template: `
-    <section id="projects" class="py-20 relative">
-    <section id="projects" class="py-20 relative">
-      <div class="max-w-6xl mx-auto px-4 sm:px-6">
+    <section id="projects" class="py-16 md:py-20 border-t border-neutral-200/80 dark:border-neutral-800/80 relative">
+      <div class="max-w-3xl mx-auto px-4 sm:px-6">
         
-        <!-- Ameya Jarvis Section Header -->
-        <div class="text-center mb-14">
-          <div class="text-xs font-mono font-bold text-[#415b06] dark:text-[#8bab2a] uppercase tracking-widest mb-2">
-            SELECTED WORK
+        <!-- Section Header -->
+        <div class="mb-10 scroll-reveal">
+          <div class="text-[11px] font-mono uppercase tracking-widest text-neutral-500 dark:text-neutral-400 mb-1">
+            03 // SELECTED WORK
           </div>
-          <h2 class="text-3xl sm:text-4xl font-extrabold text-[#1e1a14] dark:text-[#f5efe6] mb-3">
+          <h2 class="text-2xl sm:text-3xl font-semibold tracking-tight text-neutral-900 dark:text-neutral-100">
             Featured Projects
           </h2>
-          <p class="text-sm sm:text-base text-[#4a3e2e] dark:text-[#d6cab8] max-w-2xl mx-auto leading-relaxed">
-            A curated selection of database engineering, AI/ML research, and full-stack enterprise builds with real-world impact.
-          </p>
         </div>
 
-        <!-- 3-Column Grid (Matches video 00:06) -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-          
-          <!-- Project 1: Library Management System -->
-          <div class="p-7 rounded-3xl bg-[#faf6f0]/80 dark:bg-[#16120e]/80 border border-[#415b06]/20 dark:border-[#a89070]/20 backdrop-blur-xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2.5 hover:border-[#415b06] dark:hover:border-[#8bab2a] flex flex-col justify-between group hover-flash">
-            <div>
-              <div class="flex items-center justify-between mb-5">
-                <div class="w-11 h-11 rounded-2xl bg-[#415b06]/10 dark:bg-[#8bab2a]/15 text-[#415b06] dark:text-[#8bab2a] flex items-center justify-center font-bold text-lg">
-                  <i class="pi pi-database"></i>
-                </div>
-                <a href="https://github.com/SAITEJA-012" target="_blank" class="w-9 h-9 rounded-xl border border-[#415b06]/20 flex items-center justify-center text-[#4a3e2e] dark:text-[#d6cab8] hover:text-[#415b06] dark:hover:text-[#8bab2a] hover:bg-[#415b06]/10 transition-all">
-                  <i class="pi pi-external-link text-xs"></i>
-                </a>
+        <!-- Minimalist Project Cards Stack -->
+        <div class="space-y-4">
+          <div *ngFor="let p of projects; let idx = index" 
+               [ngClass]="'stagger-' + ((idx % 3) + 1)"
+               class="p-5 sm:p-6 rounded-2xl bg-white dark:bg-neutral-900/60 border border-neutral-200/90 dark:border-neutral-800/90 hover:border-[#b38e2e] dark:hover:border-[#dfc378] transition-all duration-200 group shadow-xs scroll-reveal">
+            
+            <div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1 mb-2">
+              <div class="flex items-center gap-2.5">
+                <h3 class="text-base sm:text-lg font-semibold text-neutral-900 dark:text-neutral-100 group-hover:text-[#b38e2e] dark:group-hover:text-[#dfc378] transition-colors">
+                  {{ p.title }}
+                </h3>
+                <span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-400">
+                  {{ p.category }}
+                </span>
               </div>
-              <h3 class="text-lg font-bold text-[#1e1a14] dark:text-[#f5efe6] group-hover:text-[#415b06] dark:group-hover:text-[#8bab2a] transition-colors mb-2">
-                Library Management System
-              </h3>
-              <p class="text-xs sm:text-sm text-[#4a3e2e] dark:text-[#d6cab8] leading-relaxed mb-6">
-                Enterprise-grade library automation system. Increased overall operational efficiency by 35% by integrating automated book issue/return tracking, algorithmic fine calculation, and automated email notification modules.
-              </p>
-            </div>
-            <div class="flex flex-wrap gap-2 pt-4 border-t border-[#415b06]/10 dark:border-[#a89070]/10">
-              <span class="px-3 py-1 rounded-full bg-[#faf6f0]/80 dark:bg-[#0e0b09]/80 border border-[#415b06]/15 text-[11px] font-bold text-[#1e1a14] dark:text-[#f5efe6]">Java</span>
-              <span class="px-3 py-1 rounded-full bg-[#faf6f0]/80 dark:bg-[#0e0b09]/80 border border-[#415b06]/15 text-[11px] font-bold text-[#1e1a14] dark:text-[#f5efe6]">MySQL</span>
-              <span class="px-3 py-1 rounded-full bg-[#faf6f0]/80 dark:bg-[#0e0b09]/80 border border-[#415b06]/15 text-[11px] font-bold text-[#1e1a14] dark:text-[#f5efe6]">JDBC</span>
-              <span class="px-3 py-1 rounded-full bg-[#faf6f0]/80 dark:bg-[#0e0b09]/80 border border-[#415b06]/15 text-[11px] font-bold text-[#1e1a14] dark:text-[#f5efe6]">SQL</span>
-            </div>
-          </div>
 
-          <!-- Project 2: Food AI & Calorie Estimation -->
-          <div class="p-7 rounded-3xl bg-[#faf6f0]/80 dark:bg-[#16120e]/80 border border-[#415b06]/20 dark:border-[#a89070]/20 backdrop-blur-xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2.5 hover:border-[#415b06] dark:hover:border-[#8bab2a] flex flex-col justify-between group hover-flash">
-            <div>
-              <div class="flex items-center justify-between mb-5">
-                <div class="w-11 h-11 rounded-2xl bg-[#415b06]/10 dark:bg-[#8bab2a]/15 text-[#415b06] dark:text-[#8bab2a] flex items-center justify-center font-bold text-lg">
-                  <i class="pi pi-camera"></i>
-                </div>
-                <a href="https://github.com/SAITEJA-012" target="_blank" class="w-9 h-9 rounded-xl border border-[#415b06]/20 flex items-center justify-center text-[#4a3e2e] dark:text-[#d6cab8] hover:text-[#415b06] dark:hover:text-[#8bab2a] hover:bg-[#415b06]/10 transition-all">
-                  <i class="pi pi-external-link text-xs"></i>
-                </a>
+              <span class="text-xs font-mono font-medium text-[#b38e2e] dark:text-[#dfc378]">
+                {{ p.metric }}
+              </span>
+            </div>
+
+            <p class="text-xs sm:text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed mb-4">
+              {{ p.description }}
+            </p>
+
+            <div class="flex items-center justify-between pt-3 border-t border-neutral-100 dark:border-neutral-800/60 text-xs">
+              <div class="flex flex-wrap gap-1.5">
+                <span *ngFor="let t of p.tech" 
+                      class="px-2 py-0.5 rounded bg-neutral-100 dark:bg-neutral-800/80 text-[10px] font-mono text-neutral-600 dark:text-neutral-400">
+                  {{ t }}
+                </span>
               </div>
-              <h3 class="text-lg font-bold text-[#1e1a14] dark:text-[#f5efe6] group-hover:text-[#415b06] dark:group-hover:text-[#8bab2a] transition-colors mb-2">
-                Food AI &amp; Calorie Estimation
-              </h3>
-              <p class="text-xs sm:text-sm text-[#4a3e2e] dark:text-[#d6cab8] leading-relaxed mb-6">
-                Published AI research at ICMDRI (Top 15%). Engineered a CNN computer vision model achieving 92% classification accuracy for multi-class food recognition and real-time nutritional calorie estimation using MobileNetV2.
-              </p>
-            </div>
-            <div class="flex flex-wrap gap-2 pt-4 border-t border-[#415b06]/10 dark:border-[#a89070]/10">
-              <span class="px-3 py-1 rounded-full bg-[#faf6f0]/80 dark:bg-[#0e0b09]/80 border border-[#415b06]/15 text-[11px] font-bold text-[#1e1a14] dark:text-[#f5efe6]">Python</span>
-              <span class="px-3 py-1 rounded-full bg-[#faf6f0]/80 dark:bg-[#0e0b09]/80 border border-[#415b06]/15 text-[11px] font-bold text-[#1e1a14] dark:text-[#f5efe6]">TensorFlow</span>
-              <span class="px-3 py-1 rounded-full bg-[#faf6f0]/80 dark:bg-[#0e0b09]/80 border border-[#415b06]/15 text-[11px] font-bold text-[#1e1a14] dark:text-[#f5efe6]">MobileNetV2</span>
-              <span class="px-3 py-1 rounded-full bg-[#faf6f0]/80 dark:bg-[#0e0b09]/80 border border-[#415b06]/15 text-[11px] font-bold text-[#1e1a14] dark:text-[#f5efe6]">OpenCV</span>
-            </div>
-          </div>
 
-          <!-- Project 3: Traffic Surveillance -->
-          <div class="p-7 rounded-3xl bg-[#faf6f0]/80 dark:bg-[#16120e]/80 border border-[#415b06]/20 dark:border-[#a89070]/20 backdrop-blur-xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2.5 hover:border-[#415b06] dark:hover:border-[#8bab2a] flex flex-col justify-between group hover-flash">
-            <div>
-              <div class="flex items-center justify-between mb-5">
-                <div class="w-11 h-11 rounded-2xl bg-[#415b06]/10 dark:bg-[#8bab2a]/15 text-[#415b06] dark:text-[#8bab2a] flex items-center justify-center font-bold text-lg">
-                  <i class="pi pi-car"></i>
-                </div>
-                <a href="https://github.com/SAITEJA-012" target="_blank" class="w-9 h-9 rounded-xl border border-[#415b06]/20 flex items-center justify-center text-[#4a3e2e] dark:text-[#d6cab8] hover:text-[#415b06] dark:hover:text-[#8bab2a] hover:bg-[#415b06]/10 transition-all">
-                  <i class="pi pi-external-link text-xs"></i>
-                </a>
-              </div>
-              <h3 class="text-lg font-bold text-[#1e1a14] dark:text-[#f5efe6] group-hover:text-[#415b06] dark:group-hover:text-[#8bab2a] transition-colors mb-2">
-                Real-Time Traffic Surveillance
-              </h3>
-              <p class="text-xs sm:text-sm text-[#4a3e2e] dark:text-[#d6cab8] leading-relaxed mb-6">
-                Built a high-accuracy traffic monitoring and vehicle tracking pipeline using Convolutional Neural Networks and YOLOv7, achieving 96% detection accuracy. Engineered multithreading for a 30% speed boost.
-              </p>
+              <a [href]="p.githubUrl" target="_blank" 
+                 class="font-mono text-xs text-neutral-700 dark:text-neutral-300 hover:text-[#b38e2e] dark:hover:text-[#dfc378] flex items-center gap-1 transition-colors">
+                <span>Code</span>
+                <i class="pi pi-arrow-up-right text-[10px]"></i>
+              </a>
             </div>
-            <div class="flex flex-wrap gap-2 pt-4 border-t border-[#415b06]/10 dark:border-[#a89070]/10">
-              <span class="px-3 py-1 rounded-full bg-[#faf6f0]/80 dark:bg-[#0e0b09]/80 border border-[#415b06]/15 text-[11px] font-bold text-[#1e1a14] dark:text-[#f5efe6]">YOLOv7</span>
-              <span class="px-3 py-1 rounded-full bg-[#faf6f0]/80 dark:bg-[#0e0b09]/80 border border-[#415b06]/15 text-[11px] font-bold text-[#1e1a14] dark:text-[#f5efe6]">OpenCV</span>
-              <span class="px-3 py-1 rounded-full bg-[#faf6f0]/80 dark:bg-[#0e0b09]/80 border border-[#415b06]/15 text-[11px] font-bold text-[#1e1a14] dark:text-[#f5efe6]">Computer Vision</span>
-              <span class="px-3 py-1 rounded-full bg-[#faf6f0]/80 dark:bg-[#0e0b09]/80 border border-[#415b06]/15 text-[11px] font-bold text-[#1e1a14] dark:text-[#f5efe6]">Multithreading</span>
-            </div>
-          </div>
 
-          <!-- Project 4: Spam Classifier -->
-          <div class="p-7 rounded-3xl bg-[#faf6f0]/80 dark:bg-[#16120e]/80 border border-[#415b06]/20 dark:border-[#a89070]/20 backdrop-blur-xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2.5 hover:border-[#415b06] dark:hover:border-[#8bab2a] flex flex-col justify-between group hover-flash">
-            <div>
-              <div class="flex items-center justify-between mb-5">
-                <div class="w-11 h-11 rounded-2xl bg-[#415b06]/10 dark:bg-[#8bab2a]/15 text-[#415b06] dark:text-[#8bab2a] flex items-center justify-center font-bold text-lg">
-                  <i class="pi pi-shield"></i>
-                </div>
-                <a href="https://github.com/SAITEJA-012" target="_blank" class="w-9 h-9 rounded-xl border border-[#415b06]/20 flex items-center justify-center text-[#4a3e2e] dark:text-[#d6cab8] hover:text-[#415b06] dark:hover:text-[#8bab2a] hover:bg-[#415b06]/10 transition-all">
-                  <i class="pi pi-external-link text-xs"></i>
-                </a>
-              </div>
-              <h3 class="text-lg font-bold text-[#1e1a14] dark:text-[#f5efe6] group-hover:text-[#415b06] dark:group-hover:text-[#8bab2a] transition-colors mb-2">
-                Spam Classifier &amp; Text NLP
-              </h3>
-              <p class="text-xs sm:text-sm text-[#4a3e2e] dark:text-[#d6cab8] leading-relaxed mb-6">
-                Engineered an intelligent text classification engine utilizing TF-IDF vectorization and Naive Bayes / Random Forest algorithms to filter spam with 98.4% precision and minimal false positives.
-              </p>
-            </div>
-            <div class="flex flex-wrap gap-2 pt-4 border-t border-[#415b06]/10 dark:border-[#a89070]/10">
-              <span class="px-3 py-1 rounded-full bg-[#faf6f0]/80 dark:bg-[#0e0b09]/80 border border-[#415b06]/15 text-[11px] font-bold text-[#1e1a14] dark:text-[#f5efe6]">Python</span>
-              <span class="px-3 py-1 rounded-full bg-[#faf6f0]/80 dark:bg-[#0e0b09]/80 border border-[#415b06]/15 text-[11px] font-bold text-[#1e1a14] dark:text-[#f5efe6]">Scikit-Learn</span>
-              <span class="px-3 py-1 rounded-full bg-[#faf6f0]/80 dark:bg-[#0e0b09]/80 border border-[#415b06]/15 text-[11px] font-bold text-[#1e1a14] dark:text-[#f5efe6]">TF-IDF</span>
-              <span class="px-3 py-1 rounded-full bg-[#faf6f0]/80 dark:bg-[#0e0b09]/80 border border-[#415b06]/15 text-[11px] font-bold text-[#1e1a14] dark:text-[#f5efe6]">NLP</span>
-            </div>
           </div>
-
-          <!-- Project 5: Enterprise PL/SQL Migration Toolkit -->
-          <div class="p-7 rounded-3xl bg-[#faf6f0]/80 dark:bg-[#16120e]/80 border border-[#415b06]/20 dark:border-[#a89070]/20 backdrop-blur-xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2.5 hover:border-[#415b06] dark:hover:border-[#8bab2a] flex flex-col justify-between group hover-flash">
-            <div>
-              <div class="flex items-center justify-between mb-5">
-                <div class="w-11 h-11 rounded-2xl bg-[#415b06]/10 dark:bg-[#8bab2a]/15 text-[#415b06] dark:text-[#8bab2a] flex items-center justify-center font-bold text-lg">
-                  <i class="pi pi-server"></i>
-                </div>
-                <a href="https://github.com/SAITEJA-012" target="_blank" class="w-9 h-9 rounded-xl border border-[#415b06]/20 flex items-center justify-center text-[#4a3e2e] dark:text-[#d6cab8] hover:text-[#415b06] dark:hover:text-[#8bab2a] hover:bg-[#415b06]/10 transition-all">
-                  <i class="pi pi-external-link text-xs"></i>
-                </a>
-              </div>
-              <h3 class="text-lg font-bold text-[#1e1a14] dark:text-[#f5efe6] group-hover:text-[#415b06] dark:group-hover:text-[#8bab2a] transition-colors mb-2">
-                PL/SQL &amp; Cloud Migration Toolkit
-              </h3>
-              <p class="text-xs sm:text-sm text-[#4a3e2e] dark:text-[#d6cab8] leading-relaxed mb-6">
-                Custom suite of PL/SQL packages, cursors, and validation scripts developed to automate data cleansing, schema mapping, and zero-downtime migration to AWS RDS for Shipconsole enterprise clients.
-              </p>
-            </div>
-            <div class="flex flex-wrap gap-2 pt-4 border-t border-[#415b06]/10 dark:border-[#a89070]/10">
-              <span class="px-3 py-1 rounded-full bg-[#faf6f0]/80 dark:bg-[#0e0b09]/80 border border-[#415b06]/15 text-[11px] font-bold text-[#1e1a14] dark:text-[#f5efe6]">PL/SQL</span>
-              <span class="px-3 py-1 rounded-full bg-[#faf6f0]/80 dark:bg-[#0e0b09]/80 border border-[#415b06]/15 text-[11px] font-bold text-[#1e1a14] dark:text-[#f5efe6]">Oracle</span>
-              <span class="px-3 py-1 rounded-full bg-[#faf6f0]/80 dark:bg-[#0e0b09]/80 border border-[#415b06]/15 text-[11px] font-bold text-[#1e1a14] dark:text-[#f5efe6]">AWS RDS</span>
-              <span class="px-3 py-1 rounded-full bg-[#faf6f0]/80 dark:bg-[#0e0b09]/80 border border-[#415b06]/15 text-[11px] font-bold text-[#1e1a14] dark:text-[#f5efe6]">ETL</span>
-            </div>
-          </div>
-
-          <!-- Project 6: Cloud Native Task Tracker -->
-          <div class="p-7 rounded-3xl bg-[#faf6f0]/80 dark:bg-[#16120e]/80 border border-[#415b06]/20 dark:border-[#a89070]/20 backdrop-blur-xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2.5 hover:border-[#415b06] dark:hover:border-[#8bab2a] flex flex-col justify-between group hover-flash">
-            <div>
-              <div class="flex items-center justify-between mb-5">
-                <div class="w-11 h-11 rounded-2xl bg-[#415b06]/10 dark:bg-[#8bab2a]/15 text-[#415b06] dark:text-[#8bab2a] flex items-center justify-center font-bold text-lg">
-                  <i class="pi pi-check-square"></i>
-                </div>
-                <a href="https://github.com/SAITEJA-012" target="_blank" class="w-9 h-9 rounded-xl border border-[#415b06]/20 flex items-center justify-center text-[#4a3e2e] dark:text-[#d6cab8] hover:text-[#415b06] dark:hover:text-[#8bab2a] hover:bg-[#415b06]/10 transition-all">
-                  <i class="pi pi-external-link text-xs"></i>
-                </a>
-              </div>
-              <h3 class="text-lg font-bold text-[#1e1a14] dark:text-[#f5efe6] group-hover:text-[#415b06] dark:group-hover:text-[#8bab2a] transition-colors mb-2">
-                Cloud-Native Task Management API
-              </h3>
-              <p class="text-xs sm:text-sm text-[#4a3e2e] dark:text-[#d6cab8] leading-relaxed mb-6">
-                Full-stack RESTful microservices built with Java Spring Boot, Hibernate JPA, and Angular. Containerized with Docker and deployed on AWS EC2 with CI/CD pipeline automation.
-              </p>
-            </div>
-            <div class="flex flex-wrap gap-2 pt-4 border-t border-[#415b06]/10 dark:border-[#a89070]/10">
-              <span class="px-3 py-1 rounded-full bg-[#faf6f0]/80 dark:bg-[#0e0b09]/80 border border-[#415b06]/15 text-[11px] font-bold text-[#1e1a14] dark:text-[#f5efe6]">Java Spring</span>
-              <span class="px-3 py-1 rounded-full bg-[#faf6f0]/80 dark:bg-[#0e0b09]/80 border border-[#415b06]/15 text-[11px] font-bold text-[#1e1a14] dark:text-[#f5efe6]">Angular</span>
-              <span class="px-3 py-1 rounded-full bg-[#faf6f0]/80 dark:bg-[#0e0b09]/80 border border-[#415b06]/15 text-[11px] font-bold text-[#1e1a14] dark:text-[#f5efe6]">Docker</span>
-              <span class="px-3 py-1 rounded-full bg-[#faf6f0]/80 dark:bg-[#0e0b09]/80 border border-[#415b06]/15 text-[11px] font-bold text-[#1e1a14] dark:text-[#f5efe6]">AWS</span>
-            </div>
-          </div>
-
         </div>
 
-        <!-- Center GitHub Button (Matches video 00:08) -->
-        <div class="text-center">
+        <!-- Minimal GitHub Link Bar -->
+        <div class="mt-8 text-center sm:text-left">
           <a href="https://github.com/SAITEJA-012" target="_blank" 
-             class="inline-flex items-center gap-2.5 px-8 py-4 rounded-2xl bg-[#faf6f0] dark:bg-[#16120e] border border-[#415b06]/30 dark:border-[#a89070]/30 hover:bg-[#415b06]/10 text-[#1e1a14] dark:text-[#f5efe6] font-bold text-xs uppercase tracking-widest transition-all shadow-md transform hover:-translate-y-1 hover-flash">
-            <span>SEE ALL PROJECTS ON GITHUB</span>
-            <i class="pi pi-arrow-right text-[10px]"></i>
+             class="inline-flex items-center gap-2 text-xs font-mono text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors">
+            <i class="pi pi-github"></i>
+            <span>Explore all repositories on GitHub &rarr;</span>
           </a>
         </div>
 
@@ -197,4 +85,61 @@ import { CommonModule } from '@angular/common';
     </section>
   `
 })
-export class ProjectsComponent {}
+export class ProjectsComponent {
+  projects: Project[] = [
+    {
+      title: 'Enterprise PL/SQL Migration Toolkit',
+      tagline: 'Zero-Downtime Data Architecture',
+      category: 'Database',
+      metric: 'Production Ready',
+      description: 'Automated suite of PL/SQL packages, cursors, and schema transformation procedures built for zero-downtime ERP migrations to AWS RDS with high transactional integrity.',
+      tech: ['Oracle PL/SQL', 'AWS RDS', 'Stored Procedures', 'ETL'],
+      githubUrl: 'https://github.com/SAITEJA-012'
+    },
+    {
+      title: 'Food AI & Calorie Estimation',
+      tagline: 'Deep Learning Computer Vision',
+      category: 'AI / Research',
+      metric: 'ICMDRI Published',
+      description: 'Published research at ICMDRI (Top 15% innovation). Built a deep CNN computer vision model with MobileNetV2 achieving 92% accuracy for real-time nutritional estimation.',
+      tech: ['Python', 'TensorFlow', 'MobileNetV2', 'OpenCV'],
+      githubUrl: 'https://github.com/SAITEJA-012'
+    },
+    {
+      title: 'Real-Time Traffic Surveillance',
+      tagline: 'Intelligent CCTV Analytics',
+      category: 'Computer Vision',
+      metric: '96% Detection mAP',
+      description: 'Traffic monitoring and vehicle density tracking pipeline leveraging YOLOv7 with multithreading, providing 30% execution speed enhancement across streaming video.',
+      tech: ['YOLOv7', 'OpenCV', 'Python', 'Multithreading'],
+      githubUrl: 'https://github.com/SAITEJA-012'
+    },
+    {
+      title: 'Library Automation & Management System',
+      tagline: 'Enterprise Java Automation',
+      category: 'Enterprise Java',
+      metric: '+35% Efficiency',
+      description: 'Institutional automation system integrating automated book issue/return tracking, algorithmic fine calculation, and notification dispatch using Java and MySQL.',
+      tech: ['Java', 'MySQL', 'JDBC', 'SQL Optimization'],
+      githubUrl: 'https://github.com/SAITEJA-012'
+    },
+    {
+      title: 'Cloud-Native Task Management API',
+      tagline: 'RESTful Microservices',
+      category: 'Microservices',
+      metric: 'AWS Deployed',
+      description: 'Full-stack RESTful microservices architecture built with Java Spring Boot and Angular, containerized with Docker and orchestrated on AWS EC2.',
+      tech: ['Java Spring Boot', 'Angular', 'Docker', 'AWS EC2'],
+      githubUrl: 'https://github.com/SAITEJA-012'
+    },
+    {
+      title: 'Intelligent Spam Classifier',
+      tagline: 'Natural Language Processing',
+      category: 'Machine Learning',
+      metric: '98.4% Precision',
+      description: 'NLP classification engine using TF-IDF term vectorization and ensemble algorithms to filter spam with high precision and minimal false positives.',
+      tech: ['Python', 'Scikit-Learn', 'TF-IDF', 'NLP'],
+      githubUrl: 'https://github.com/SAITEJA-012'
+    }
+  ];
+}

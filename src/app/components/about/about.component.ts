@@ -1,188 +1,89 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+
+interface TechItem {
+  name: string;
+  category: 'database' | 'backend' | 'cloud' | 'ai' | 'frontend';
+  level: string;
+  logo: string;
+}
 
 @Component({
   selector: 'app-about',
   standalone: true,
   imports: [CommonModule],
   template: `
-    <section id="about" class="py-20 relative">
-      <div class="max-w-6xl mx-auto px-4 sm:px-6">
+    <section id="about" class="py-16 md:py-20 border-t border-neutral-200/80 dark:border-neutral-800/80 relative">
+      <div class="max-w-3xl mx-auto px-4 sm:px-6">
         
-        <!-- Section Heading -->
-        <div class="text-center sm:text-left mb-12">
-          <h2 class="text-3xl sm:text-4xl font-extrabold text-[#1e1a14] dark:text-[#f5efe6] relative inline-block">
-            About Me
-            <span class="absolute -bottom-2 left-0 w-16 h-1 bg-gradient-to-r from-[#415b06] to-[#8bab2a] rounded-full"></span>
+        <!-- Section Header -->
+        <div class="mb-10 scroll-reveal">
+          <div class="text-[11px] font-mono uppercase tracking-widest text-neutral-500 dark:text-neutral-400 mb-1">
+            01 // CAPABILITIES
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-semibold tracking-tight text-neutral-900 dark:text-neutral-100">
+            Tech Stack &amp; Foundations
           </h2>
+          <p class="text-xs sm:text-sm text-neutral-600 dark:text-neutral-400 mt-1">
+            Hover over any logo to reveal its name and proficiency level.
+          </p>
         </div>
 
-        <!-- Top Row: Profile Card & Technical Focus Card -->
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 mb-6">
-          
-          <!-- Left: Profile Card -->
-          <div class="lg:col-span-5 p-7 rounded-3xl bg-[#faf6f0]/80 dark:bg-[#16120e]/80 border border-[#415b06]/20 dark:border-[#a89070]/20 backdrop-blur-xl shadow-lg flex flex-col justify-between gap-6 transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:border-[#415b06] dark:hover:border-[#8bab2a] hover-flash">
-            <div>
-              <div class="text-[11px] font-mono font-bold text-[#415b06] dark:text-[#8bab2a] uppercase tracking-widest mb-2">
-                PROFILE
-              </div>
-              <h3 class="text-3xl sm:text-4xl font-heading mb-1 tracking-tight">
-                <span class="font-extrabold text-[#1e1a14] dark:text-[#f5efe6]">Saiteja</span>
-                <span class="font-semibold text-[#415b06] dark:text-[#8bab2a] ml-2">Athmakuri</span>
-              </h3>
-              <div class="text-sm font-bold text-[#a89070] dark:text-[#b9ab95] mb-4">
-                Database Engineer &amp; Full Stack Developer
-              </div>
-              <p class="text-xs sm:text-sm text-[#4a3e2e] dark:text-[#d6cab8] leading-relaxed">
-                Database engineering specialist building PL/SQL transaction pipelines, ERP cloud migrations at Shipconsole, and scalable Java/Spring Boot full-stack applications with high availability.
-              </p>
-            </div>
-            
-            <div class="flex flex-wrap gap-2.5 pt-4 border-t border-[#415b06]/10 dark:border-[#a89070]/10">
-              <span class="px-3.5 py-1.5 rounded-full bg-[#415b06]/10 dark:bg-[#8bab2a]/15 text-[#415b06] dark:text-[#8bab2a] text-xs font-bold flex items-center gap-1.5">
-                <i class="pi pi-map-marker text-[10px]"></i> Hyderabad, India
-              </span>
-              <span class="px-3.5 py-1.5 rounded-full bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 text-xs font-bold flex items-center gap-1.5">
-                <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span> Open to work
-              </span>
-            </div>
-          </div>
-
-          <!-- Right: Technical Focus Card -->
-          <div class="lg:col-span-7 p-7 rounded-3xl bg-[#faf6f0]/80 dark:bg-[#16120e]/80 border border-[#415b06]/20 dark:border-[#a89070]/20 backdrop-blur-xl shadow-lg flex flex-col justify-between gap-6 transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:border-[#415b06] dark:hover:border-[#8bab2a] hover-flash">
-            <div>
-              <h3 class="text-xl font-bold text-[#1e1a14] dark:text-[#f5efe6] mb-2">
-                Technical Focus
-              </h3>
-              <p class="text-xs sm:text-sm text-[#4a3e2e] dark:text-[#d6cab8] leading-relaxed mb-6">
-                Focused on database engineering, cloud-native ERP migrations, AI/ML analytics, and production-ready full-stack builds with a cloud-first mindset.
-              </p>
-            </div>
-            
-            <!-- Skills Pills Grid -->
-            <div class="flex flex-wrap gap-2.5">
-              <div class="px-4 py-2.5 rounded-xl bg-[#f8f9fa]/80 dark:bg-[#0e0b09]/80 border border-[#415b06]/20 text-xs font-bold text-[#1e1a14] dark:text-[#f5efe6] shadow-sm flex items-center gap-2 transition-transform duration-200 hover:-translate-y-1 hover:border-[#415b06] dark:hover:border-[#8bab2a] hover-flash">
-                <i class="pi pi-database text-[#415b06] dark:text-[#8bab2a]"></i>
-                <span>SQL &amp; PL/SQL Database</span>
-              </div>
-              <div class="px-4 py-2.5 rounded-xl bg-[#f8f9fa]/80 dark:bg-[#0e0b09]/80 border border-[#415b06]/20 text-xs font-bold text-[#1e1a14] dark:text-[#f5efe6] shadow-sm flex items-center gap-2 transition-transform duration-200 hover:-translate-y-1 hover:border-[#415b06] dark:hover:border-[#8bab2a] hover-flash">
-                <i class="pi pi-code text-[#415b06] dark:text-[#8bab2a]"></i>
-                <span>Java &amp; Spring Boot</span>
-              </div>
-              <div class="px-4 py-2.5 rounded-xl bg-[#f8f9fa]/80 dark:bg-[#0e0b09]/80 border border-[#415b06]/20 text-xs font-bold text-[#1e1a14] dark:text-[#f5efe6] shadow-sm flex items-center gap-2 transition-transform duration-200 hover:-translate-y-1 hover:border-[#415b06] dark:hover:border-[#8bab2a] hover-flash">
-                <i class="pi pi-cloud text-[#415b06] dark:text-[#8bab2a]"></i>
-                <span>AWS &amp; Cloud Migrations</span>
-              </div>
-              <div class="px-4 py-2.5 rounded-xl bg-[#f8f9fa]/80 dark:bg-[#0e0b09]/80 border border-[#415b06]/20 text-xs font-bold text-[#1e1a14] dark:text-[#f5efe6] shadow-sm flex items-center gap-2 transition-transform duration-200 hover:-translate-y-1 hover:border-[#415b06] dark:hover:border-[#8bab2a] hover-flash">
-                <i class="pi pi-bolt text-[#415b06] dark:text-[#8bab2a]"></i>
-                <span>Python &amp; AI/ML Analytics</span>
-              </div>
-              <div class="px-4 py-2.5 rounded-xl bg-[#f8f9fa]/80 dark:bg-[#0e0b09]/80 border border-[#415b06]/20 text-xs font-bold text-[#1e1a14] dark:text-[#f5efe6] shadow-sm flex items-center gap-2 transition-transform duration-200 hover:-translate-y-1 hover:border-[#415b06] dark:hover:border-[#8bab2a] hover-flash">
-                <i class="pi pi-globe text-[#415b06] dark:text-[#8bab2a]"></i>
-                <span>Web Dev (HTML/CSS/JS/Angular)</span>
-              </div>
-              <div class="px-4 py-2.5 rounded-xl bg-[#f8f9fa]/80 dark:bg-[#0e0b09]/80 border border-[#415b06]/20 text-xs font-bold text-[#1e1a14] dark:text-[#f5efe6] shadow-sm flex items-center gap-2 transition-transform duration-200 hover:-translate-y-1 hover:border-[#415b06] dark:hover:border-[#8bab2a] hover-flash">
-                <i class="pi pi-box text-[#415b06] dark:text-[#8bab2a]"></i>
-                <span>Docker, Git &amp; ServiceNow</span>
-              </div>
-            </div>
-          </div>
-
+        <!-- Filter Pills -->
+        <div class="flex flex-wrap gap-2 mb-8 text-xs font-mono scroll-reveal stagger-1">
+          <button *ngFor="let cat of categories" 
+                  (click)="selectedCategory = cat.id"
+                  [ngClass]="selectedCategory === cat.id ? 'bg-neutral-900 dark:bg-neutral-100 text-white dark:text-neutral-900 font-semibold shadow-xs' : 'text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white border border-neutral-200 dark:border-neutral-800'"
+                  class="px-3 py-1.5 rounded-md transition-colors">
+            {{ cat.label }}
+          </button>
         </div>
 
-        <!-- Bottom Row: 3 Columns Grid (Certifications, Interactive Map, Education) -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-          
-          <!-- Column 1: Certifications -->
-          <div class="p-7 rounded-3xl bg-[#faf6f0]/80 dark:bg-[#16120e]/80 border border-[#415b06]/20 dark:border-[#a89070]/20 backdrop-blur-xl shadow-lg flex flex-col justify-between transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:border-[#415b06] dark:hover:border-[#8bab2a] hover-flash">
-            <div>
-              <h4 class="text-base font-bold text-[#1e1a14] dark:text-[#f5efe6] mb-4 flex items-center gap-2">
-                <i class="pi pi-verified text-[#415b06] dark:text-[#8bab2a]"></i>
-                <span>Certifications</span>
-              </h4>
-              <ul class="space-y-3 text-xs text-[#4a3e2e] dark:text-[#d6cab8]">
-                <li class="flex items-start gap-2.5">
-                  <span class="text-[#415b06] dark:text-[#8bab2a] font-bold mt-0.5">&bull;</span>
-                  <span><strong>AWS Cloud Essentials</strong> &ndash; Amazon Web Services</span>
-                </li>
-                <li class="flex items-start gap-2.5">
-                  <span class="text-[#415b06] dark:text-[#8bab2a] font-bold mt-0.5">&bull;</span>
-                  <span><strong>IBM SkillsBuild AI</strong> &ndash; IBM</span>
-                </li>
-                <li class="flex items-start gap-2.5">
-                  <span class="text-[#415b06] dark:text-[#8bab2a] font-bold mt-0.5">&bull;</span>
-                  <span><strong>Java Programming</strong> &ndash; Great Learning</span>
-                </li>
-                <li class="flex items-start gap-2.5">
-                  <span class="text-[#415b06] dark:text-[#8bab2a] font-bold mt-0.5">&bull;</span>
-                  <span><strong>ServiceNow Micro-Cert</strong> &ndash; Welcome to ServiceNow</span>
-                </li>
-                <li class="flex items-start gap-2.5">
-                  <span class="text-[#415b06] dark:text-[#8bab2a] font-bold mt-0.5">&bull;</span>
-                  <span><strong>Oracle SQL Fundamentals</strong> &ndash; Cognitive Class</span>
-                </li>
-              </ul>
-            </div>
-            <div class="mt-6 pt-4 border-t border-[#415b06]/10 dark:border-[#a89070]/10 text-[11px] font-mono text-[#a89070] dark:text-[#b9ab95]">
-              VERIFIED CREDENTIALS
-            </div>
-          </div>
-
-          <!-- Column 2: Interactive OpenStreetMap Card (Exactly like Nagpur map at 00:02) -->
-          <div class="rounded-3xl bg-[#faf6f0]/80 dark:bg-[#16120e]/80 border border-[#415b06]/20 dark:border-[#a89070]/20 backdrop-blur-xl shadow-lg overflow-hidden relative flex flex-col min-h-[280px] transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:border-[#415b06] dark:hover:border-[#8bab2a] hover-flash">
-            <!-- Map Badge Overlay -->
-            <div class="absolute top-4 left-4 z-10 flex flex-col gap-1.5 pointer-events-none">
-              <span class="px-3 py-1 rounded-full bg-[#faf6f0]/95 dark:bg-[#14110d]/95 backdrop-blur-md border border-[#415b06]/20 text-xs font-bold text-[#1e1a14] dark:text-[#f5efe6] shadow-md">
-                HYDERABAD
-              </span>
-              <span class="px-2.5 py-0.5 rounded-full bg-[#415b06] text-[#faf6f0] text-[10px] font-mono font-bold w-fit shadow">
-                GMT+5:30
-              </span>
-            </div>
+        <!-- Minimalist Logo Grid with Hover Tooltip -->
+        <div class="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 gap-3 sm:gap-4 mb-14 scroll-reveal stagger-2">
+          <div *ngFor="let item of filteredSkills()" 
+               class="relative group aspect-square flex flex-col items-center justify-center p-3 rounded-xl bg-white dark:bg-neutral-900/60 border border-neutral-200/90 dark:border-neutral-800/90 hover:border-[#b38e2e] dark:hover:border-[#dfc378] transition-all duration-200 cursor-pointer shadow-xs">
             
-            <!-- OpenStreetMap Iframe -->
-            <div class="w-full h-full flex-grow relative bg-[#ddd0bf] dark:bg-[#2a241c]">
-              <iframe 
-                [src]="mapUrl" 
-                class="w-full h-full border-0 absolute inset-0 grayscale-[20%] contrast-[105%] opacity-90 hover:opacity-100 transition-opacity" 
-                title="Hyderabad Location Map"
-                loading="lazy">
-              </iframe>
+            <!-- Logo Image -->
+            <img [src]="item.logo" [alt]="item.name" 
+                 class="w-7 h-7 sm:w-8 sm:h-8 object-contain transition-transform duration-200 group-hover:scale-110">
+
+            <!-- Hover Tooltip -->
+            <div class="absolute -top-10 left-1/2 -translate-x-1/2 px-2.5 py-1 rounded-md bg-neutral-900 dark:bg-neutral-100 text-white dark:text-neutral-900 text-[11px] font-mono whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-30 shadow-lg flex items-center gap-1.5 border border-white/10 dark:border-black/10">
+              <span class="font-medium">{{ item.name }}</span>
+              <span class="text-[9px] px-1 py-0.2 rounded bg-[#b38e2e] dark:bg-[#dfc378] text-white dark:text-neutral-900 font-bold">
+                {{ item.level }}
+              </span>
             </div>
-            <div class="p-3 bg-[#faf6f0]/90 dark:bg-[#16120e]/90 border-t border-[#415b06]/10 text-center text-[10px] font-mono text-[#a89070] dark:text-[#b9ab95] z-10">
-              <i class="pi pi-map-marker text-[#415b06] dark:text-[#8bab2a] mr-1"></i> HYDERABAD, TELANGANA, INDIA
+
+          </div>
+        </div>
+
+        <!-- Academic & Background Minimalist Split -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-8 border-t border-neutral-200/80 dark:border-neutral-800/80 text-xs scroll-reveal stagger-1">
+          
+          <!-- Education -->
+          <div class="p-4 rounded-xl border border-neutral-200 dark:border-neutral-800/80 bg-white/40 dark:bg-neutral-900/30">
+            <div class="flex items-center justify-between text-neutral-500 font-mono text-[10px] uppercase mb-1">
+              <span>B.Tech Degree</span>
+              <span class="text-[#b38e2e] dark:text-[#dfc378] font-bold">7.39 CGPA</span>
             </div>
+            <div class="font-semibold text-neutral-900 dark:text-neutral-100 text-sm">
+              Siddhartha Institute of Engineering &amp; Technology
+            </div>
+            <div class="text-neutral-500 mt-1">Computer Science (AI &amp; ML) &bull; 2021 &ndash; 2025</div>
           </div>
 
-          <!-- Column 3: Education -->
-          <div class="p-7 rounded-3xl bg-[#faf6f0]/80 dark:bg-[#16120e]/80 border border-[#415b06]/20 dark:border-[#a89070]/20 backdrop-blur-xl shadow-lg flex flex-col justify-between transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:border-[#415b06] dark:hover:border-[#8bab2a] hover-flash">
-            <div>
-              <h4 class="text-base font-bold text-[#1e1a14] dark:text-[#f5efe6] mb-4 flex items-center gap-2">
-                <i class="pi pi-graduation-cap text-[#415b06] dark:text-[#8bab2a]"></i>
-                <span>Education</span>
-              </h4>
-              <ul class="space-y-4 text-xs text-[#4a3e2e] dark:text-[#d6cab8]">
-                <li class="space-y-1">
-                  <div class="font-bold text-[#1e1a14] dark:text-[#f5efe6] text-sm">B.Tech in CS (AI &amp; ML)</div>
-                  <div class="text-[#a89070] dark:text-[#b9ab95]">Siddhartha Institute of Technology &amp; Science</div>
-                  <div class="inline-block px-2 py-0.5 rounded bg-[#415b06]/10 dark:bg-[#8bab2a]/15 text-[#415b06] dark:text-[#8bab2a] text-[10px] font-mono font-bold">
-                    Graduated 2025
-                  </div>
-                </li>
-                <li class="space-y-1 pt-3 border-t border-[#415b06]/10">
-                  <div class="font-bold text-[#1e1a14] dark:text-[#f5efe6]">Intermediate (MPC)</div>
-                  <div class="text-[#a89070] dark:text-[#b9ab95]">Krishnaveni Junior College</div>
-                </li>
-                <li class="space-y-1 pt-3 border-t border-[#415b06]/10">
-                  <div class="font-bold text-[#1e1a14] dark:text-[#f5efe6]">SSC (10th Standard)</div>
-                  <div class="text-[#a89070] dark:text-[#b9ab95]">St. Mary's High School</div>
-                </li>
-              </ul>
+          <!-- Research Publication -->
+          <div class="p-4 rounded-xl border border-neutral-200 dark:border-neutral-800/80 bg-white/40 dark:bg-neutral-900/30">
+            <div class="flex items-center justify-between text-neutral-500 font-mono text-[10px] uppercase mb-1">
+              <span>Research Paper</span>
+              <span class="text-[#b38e2e] dark:text-[#dfc378] font-bold">Top 15%</span>
             </div>
-            <div class="mt-6 pt-4 border-t border-[#415b06]/10 dark:border-[#a89070]/10 text-[11px] font-mono text-[#a89070] dark:text-[#b9ab95]">
-              ACADEMIC FOUNDATION
+            <div class="font-semibold text-neutral-900 dark:text-neutral-100 text-sm">
+              Food AI &amp; Calorie Estimation (ICMDRI)
             </div>
+            <div class="text-neutral-500 mt-1">Published research using MobileNetV2 CNN (92% Accuracy)</div>
           </div>
 
         </div>
@@ -192,11 +93,40 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
   `
 })
 export class AboutComponent {
-  mapUrl: SafeResourceUrl;
+  selectedCategory = 'all';
 
-  constructor(private sanitizer: DomSanitizer) {
-    // OpenStreetMap embed coordinates for Hyderabad
-    const url = 'https://www.openstreetmap.org/export/embed.html?bbox=78.35%2C17.35%2C78.55%2C17.50&layer=mapnik';
-    this.mapUrl = this.sanitizer.bypassSecurityTrustResourceUrl(url);
+  categories = [
+    { id: 'all', label: 'All' },
+    { id: 'database', label: 'Database' },
+    { id: 'backend', label: 'Backend' },
+    { id: 'cloud', label: 'Cloud' },
+    { id: 'ai', label: 'AI & ML' },
+    { id: 'frontend', label: 'Web' }
+  ];
+
+  skills: TechItem[] = [
+    { name: 'Oracle PL/SQL', category: 'database', level: 'Expert', logo: 'assets/icons/oracle.svg' },
+    { name: 'MySQL & JDBC', category: 'database', level: 'Advanced', logo: 'assets/icons/mysql.svg' },
+    { name: 'Java (17+ & OOP)', category: 'backend', level: 'Expert', logo: 'assets/icons/java.svg' },
+    { name: 'Spring Boot REST', category: 'backend', level: 'Advanced', logo: 'assets/icons/spring.svg' },
+    { name: 'Hibernate JPA', category: 'backend', level: 'Proficient', logo: 'assets/icons/hibernate.svg' },
+    { name: 'AWS RDS & EC2', category: 'cloud', level: 'Advanced', logo: 'assets/icons/aws.svg' },
+    { name: 'Docker', category: 'cloud', level: 'Proficient', logo: 'assets/icons/docker.svg' },
+    { name: 'Git & GitHub', category: 'cloud', level: 'Advanced', logo: 'assets/icons/git.svg' },
+    { name: 'Python', category: 'ai', level: 'Advanced', logo: 'assets/icons/python.svg' },
+    { name: 'TensorFlow', category: 'ai', level: 'Advanced', logo: 'assets/icons/tensorflow.svg' },
+    { name: 'OpenCV', category: 'ai', level: 'Advanced', logo: 'assets/icons/opencv.svg' },
+    { name: 'Angular', category: 'frontend', level: 'Advanced', logo: 'assets/icons/angular.svg' },
+    { name: 'HTML5', category: 'frontend', level: 'Expert', logo: 'assets/icons/html5.svg' },
+    { name: 'CSS3', category: 'frontend', level: 'Expert', logo: 'assets/icons/css3.svg' },
+    { name: 'Tailwind CSS', category: 'frontend', level: 'Advanced', logo: 'assets/icons/tailwindcss.svg' },
+    { name: 'ServiceNow', category: 'backend', level: 'Proficient', logo: 'assets/icons/servicenow.svg' }
+  ];
+
+  filteredSkills(): TechItem[] {
+    if (this.selectedCategory === 'all') {
+      return this.skills;
+    }
+    return this.skills.filter(s => s.category === this.selectedCategory);
   }
 }

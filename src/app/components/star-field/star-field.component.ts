@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild, AfterViewInit, OnDestroy, HostListener } from '@angular/core';
+import { Component, ElementRef, ViewChild, AfterViewInit, OnDestroy, HostListener, NgZone } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 interface Star {
@@ -27,15 +27,19 @@ export class StarFieldComponent implements AfterViewInit, OnDestroy {
   private ctx!: CanvasRenderingContext2D | null;
   private animationFrameId!: number;
   private stars: Star[] = [];
-  // Increased density to 1500 to match the dense galaxy cloud of tiny specks in the picture
-  private numStars = 1500;
+  // Restored full density to match previous cosmic particle experience
+  private numStars = 1200;
+
+  constructor(private ngZone: NgZone) {}
 
   ngAfterViewInit(): void {
     const canvas = this.canvasRef.nativeElement;
     this.ctx = canvas.getContext('2d');
     this.resizeCanvas();
     this.initStars();
-    this.animate();
+    this.ngZone.runOutsideAngular(() => {
+      this.animate();
+    });
   }
 
   ngOnDestroy(): void {
@@ -57,7 +61,7 @@ export class StarFieldComponent implements AfterViewInit, OnDestroy {
   }
 
   private isDarkTheme(): boolean {
-    return document.documentElement.classList.contains('dark') || document.body.classList.contains('dark');
+    return document.documentElement.classList.contains('dark') || document.body.classList.contains('dark') || document.documentElement.classList.contains('p-dark');
   }
 
   private initStars(): void {
@@ -72,25 +76,24 @@ export class StarFieldComponent implements AfterViewInit, OnDestroy {
 
   private createStar(width: number, height: number, randomY: boolean = false): Star {
     const isDark = this.isDarkTheme();
-    // In dark theme: crisp white, warm cream, golden oat pinpricks
-    const darkColors = ['255, 255, 255', '250, 246, 240', '201, 180, 154', '168, 144, 112'];
-    // In light theme: deep olive and golden bark specks
-    const lightColors = ['65, 91, 6', '85, 114, 16', '168, 144, 112', '30, 26, 20'];
+    // In dark theme: crisp white, celestial warm gold, champagne, and starry silver
+    const darkColors = ['255, 255, 255', '223, 195, 120', '245, 224, 160', '200, 200, 200', '180, 150, 80'];
+    // In light theme: warm gold, rich bronze, charcoal slate, and subtle amber
+    const lightColors = ['179, 142, 46', '140, 110, 30', '80, 80, 75', '30, 30, 30'];
     const colorPalette = isDark ? darkColors : lightColors;
     const chosenColor = colorPalette[Math.floor(Math.random() * colorPalette.length)];
 
     return {
       x: Math.random() * width,
       y: randomY ? Math.random() * height : height + 5,
-      // Ultra-tiny dust specks and pinpricks: sizes between 0.4px and 1.2px
-      size: Math.random() * 0.8 + 0.4,
-      vx: (Math.random() - 0.5) * 0.1, // Extremely gentle horizontal drift
-      vy: -(Math.random() * 0.2 + 0.03), // Very slow upward floating like starry dust
-      alpha: Math.random() * 0.7 + 0.2,
+      // Sizes between 0.4px and 1.3px for fine cosmic dust look
+      size: Math.random() * 0.9 + 0.4,
+      vx: (Math.random() - 0.5) * 0.12, // Gentle horizontal drift
+      vy: -(Math.random() * 0.22 + 0.04), // Steady upward floating motion
+      alpha: Math.random() * 0.7 + 0.25,
       alphaChange: (Math.random() * 0.008 + 0.002) * (Math.random() > 0.5 ? 1 : -1),
       color: chosenColor,
-      // 50% tiny squares (like pixel dust in picture), 50% tiny dots
-      isSquare: Math.random() > 0.5
+      isSquare: Math.random() > 0.55
     };
   }
 
@@ -100,11 +103,11 @@ export class StarFieldComponent implements AfterViewInit, OnDestroy {
 
     this.ctx.clearRect(0, 0, canvas.width, canvas.height);
     const isDark = this.isDarkTheme();
-    const darkColors = ['255, 255, 255', '250, 246, 240', '201, 180, 154', '168, 144, 112'];
-    const lightColors = ['65, 91, 6', '85, 114, 16', '168, 144, 112', '30, 26, 20'];
+    const darkColors = ['255, 255, 255', '223, 195, 120', '245, 224, 160', '200, 200, 200', '180, 150, 80'];
+    const lightColors = ['179, 142, 46', '140, 110, 30', '80, 80, 75', '30, 30, 30'];
     const currentPalette = isDark ? darkColors : lightColors;
 
-    // Immediately update all star colors if theme switched
+    // Immediately update star colors if theme switched
     if (this.lastIsDark !== null && this.lastIsDark !== isDark) {
       for (let i = 0; i < this.stars.length; i++) {
         this.stars[i].color = currentPalette[Math.floor(Math.random() * currentPalette.length)];
@@ -139,9 +142,8 @@ export class StarFieldComponent implements AfterViewInit, OnDestroy {
         star.x = -5;
       }
 
-      // Draw ultra-tiny dust speck / star
+      // Draw floating cosmic star / dot
       this.ctx.fillStyle = `rgba(${star.color}, ${star.alpha})`;
-      
       if (star.isSquare) {
         this.ctx.fillRect(star.x, star.y, star.size, star.size);
       } else {

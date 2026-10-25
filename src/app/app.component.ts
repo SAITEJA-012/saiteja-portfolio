@@ -1,4 +1,4 @@
-import { Component, HostListener, Inject, PLATFORM_ID, OnInit } from '@angular/core';
+import { Component, HostListener, Inject, PLATFORM_ID, OnInit, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HeroComponent } from './components/hero/hero.component';
@@ -8,6 +8,7 @@ import { ProjectsComponent } from './components/projects/projects.component';
 import { ContactComponent } from './components/contact/contact.component';
 import { StarFieldComponent } from './components/star-field/star-field.component';
 import { AiAssistantComponent } from './components/ai-assistant/ai-assistant.component';
+import { CustomCursorComponent } from './components/custom-cursor/custom-cursor.component';
 
 interface SearchItem {
   title: string;
@@ -20,52 +21,84 @@ interface SearchItem {
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, FormsModule, HeroComponent, AboutComponent, ExperienceComponent, ProjectsComponent, ContactComponent, StarFieldComponent, AiAssistantComponent],
+  imports: [CommonModule, FormsModule, HeroComponent, AboutComponent, ExperienceComponent, ProjectsComponent, ContactComponent, StarFieldComponent, AiAssistantComponent, CustomCursorComponent],
   template: `
-    <!-- Moving & Twinkling Star Field Background (Light & Dark Mode) -->
+    <!-- Interactive Golden Comet Cursor Trail (like andriiponomarenko.vercel.app) -->
+    <app-custom-cursor></app-custom-cursor>
+
+    <!-- Moving & Twinkling Star Field Background Animation -->
     <app-star-field></app-star-field>
 
-    <div class="min-h-screen bg-transparent bg-grid-pattern font-sans flex flex-col relative pb-16 z-10">
-      <!-- Top Navigation Header -->
-      <header class="fixed top-0 left-0 right-0 z-[100] py-4 transition-all">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between">
-          <!-- Left Logo / Brand (Standalone SA Logo linking to #home) -->
-          <a href="#home" title="SA | Home" class="flex items-center transition-all duration-300 hover:scale-105 group">
-            <img src="assets/favicon.png?v=8" alt="SA Logo" class="w-14 h-10 sm:w-16 sm:h-11 object-contain drop-shadow-md transition-all duration-300 group-hover:drop-shadow-[0_0_12px_rgba(163,230,53,0.5)]">
+    <div class="min-h-screen bg-transparent font-sans flex flex-col relative z-10">
+      
+      <!-- Minimalist Fixed Header Navigation -->
+      <header class="fixed top-0 left-0 right-0 z-[100] py-3.5 bg-[#faf9f6]/85 dark:bg-[#0a0a0a]/85 backdrop-blur-md border-b border-neutral-200/70 dark:border-neutral-800/70 transition-all">
+        <div class="max-w-3xl mx-auto px-4 sm:px-6 flex items-center justify-between">
+          
+          <!-- Left Logo -->
+          <a href="#home" title="Saiteja Athmakuri" class="flex items-center gap-2 group">
+            <img src="assets/logo.png?v=11" alt="SA" class="w-8 h-8 object-contain transition-transform duration-200 group-hover:scale-105">
           </a>
 
-          <!-- Center Pill Nav (Desktop) with Dynamic Active Section Highlighting -->
-          <nav class="hidden md:flex items-center gap-1 p-1.5 rounded-full bg-[#faf6f0]/80 dark:bg-[#14110d]/80 backdrop-blur-md border border-[#415b06]/20 dark:border-[#a89070]/20 shadow-sm">
-            <a href="#home" (click)="setActive('home')" [ngClass]="activeSection === 'home' ? 'bg-[#415b06]/15 dark:bg-[#8bab2a]/20 text-[#415b06] dark:text-[#8bab2a] border border-[#415b06]/30 dark:border-[#8bab2a]/40 shadow-sm font-bold' : 'text-[#a89070] hover:text-[#1e1a14] dark:hover:text-[#f5efe6] border border-transparent'" class="px-5 py-2 rounded-full text-xs font-bold tracking-widest uppercase transition-all">Home</a>
-            <a href="#about" (click)="setActive('about')" [ngClass]="activeSection === 'about' ? 'bg-[#415b06]/15 dark:bg-[#8bab2a]/20 text-[#415b06] dark:text-[#8bab2a] border border-[#415b06]/30 dark:border-[#8bab2a]/40 shadow-sm font-bold' : 'text-[#a89070] hover:text-[#1e1a14] dark:hover:text-[#f5efe6] border border-transparent'" class="px-5 py-2 rounded-full text-xs font-bold tracking-widest uppercase transition-all">About</a>
-            <a href="#experience" (click)="setActive('experience')" [ngClass]="activeSection === 'experience' ? 'bg-[#415b06]/15 dark:bg-[#8bab2a]/20 text-[#415b06] dark:text-[#8bab2a] border border-[#415b06]/30 dark:border-[#8bab2a]/40 shadow-sm font-bold' : 'text-[#a89070] hover:text-[#1e1a14] dark:hover:text-[#f5efe6] border border-transparent'" class="px-5 py-2 rounded-full text-xs font-bold tracking-widest uppercase transition-all">Experience</a>
-            <a href="#projects" (click)="setActive('projects')" [ngClass]="activeSection === 'projects' ? 'bg-[#415b06]/15 dark:bg-[#8bab2a]/20 text-[#415b06] dark:text-[#8bab2a] border border-[#415b06]/30 dark:border-[#8bab2a]/40 shadow-sm font-bold' : 'text-[#a89070] hover:text-[#1e1a14] dark:hover:text-[#f5efe6] border border-transparent'" class="px-5 py-2 rounded-full text-xs font-bold tracking-widest uppercase transition-all">Projects</a>
-            <a href="#contact" (click)="setActive('contact')" [ngClass]="activeSection === 'contact' ? 'bg-[#415b06]/15 dark:bg-[#8bab2a]/20 text-[#415b06] dark:text-[#8bab2a] border border-[#415b06]/30 dark:border-[#8bab2a]/40 shadow-sm font-bold' : 'text-[#a89070] hover:text-[#1e1a14] dark:hover:text-[#f5efe6] border border-transparent'" class="px-5 py-2 rounded-full text-xs font-bold tracking-widest uppercase transition-all">Contact</a>
-            <a href="assets/Saiteja_Database_Developer.pdf" target="_blank" class="px-5 py-2 rounded-full text-xs font-bold tracking-widest text-[#a89070] hover:text-[#415b06] dark:hover:text-[#8bab2a] uppercase transition-all flex items-center gap-1 border border-transparent"><i class="pi pi-arrow-up-right text-[10px]"></i>Resume</a>
+          <!-- Center Minimalist Navigation Links -->
+          <nav class="hidden sm:flex items-center gap-5 text-xs font-mono">
+            <a href="#home" (click)="setActive('home')" 
+               [ngClass]="activeSection === 'home' ? 'text-neutral-900 dark:text-neutral-100 font-semibold underline underline-offset-4 decoration-[#b38e2e] dark:decoration-[#dfc378]' : 'text-neutral-500 hover:text-neutral-900 dark:hover:text-neutral-100'"
+               class="transition-colors">Home</a>
+            <a href="#about" (click)="setActive('about')" 
+               [ngClass]="activeSection === 'about' ? 'text-neutral-900 dark:text-neutral-100 font-semibold underline underline-offset-4 decoration-[#b38e2e] dark:decoration-[#dfc378]' : 'text-neutral-500 hover:text-neutral-900 dark:hover:text-neutral-100'"
+               class="transition-colors">Stack</a>
+            <a href="#experience" (click)="setActive('experience')" 
+               [ngClass]="activeSection === 'experience' ? 'text-neutral-900 dark:text-neutral-100 font-semibold underline underline-offset-4 decoration-[#b38e2e] dark:decoration-[#dfc378]' : 'text-neutral-500 hover:text-neutral-900 dark:hover:text-neutral-100'"
+               class="transition-colors">Experience</a>
+            <a href="#projects" (click)="setActive('projects')" 
+               [ngClass]="activeSection === 'projects' ? 'text-neutral-900 dark:text-neutral-100 font-semibold underline underline-offset-4 decoration-[#b38e2e] dark:decoration-[#dfc378]' : 'text-neutral-500 hover:text-neutral-900 dark:hover:text-neutral-100'"
+               class="transition-colors">Projects</a>
+            <a href="#contact" (click)="setActive('contact')" 
+               [ngClass]="activeSection === 'contact' ? 'text-neutral-900 dark:text-neutral-100 font-semibold underline underline-offset-4 decoration-[#b38e2e] dark:decoration-[#dfc378]' : 'text-neutral-500 hover:text-neutral-900 dark:hover:text-neutral-100'"
+               class="transition-colors">Contact</a>
           </nav>
 
-          <!-- Right Actions -->
-          <div class="flex items-center gap-3">
-            <!-- Search / Ask AI button -->
-            <button (click)="openSearch()" title="Ask AI" class="w-10 h-10 rounded-xl border border-[#415b06]/20 dark:border-[#a89070]/20 flex items-center justify-center text-[#1e1a14] dark:text-[#f5efe6] hover:bg-[#415b06]/10 transition-all">
-              <i class="pi pi-search text-sm text-[#415b06] dark:text-[#8bab2a]"></i>
+          <!-- Right Action Buttons -->
+          <div class="flex items-center gap-2">
+            <!-- Search Button -->
+            <button (click)="openSearch()" title="Search or Ask" class="p-2 rounded-lg text-neutral-500 hover:text-neutral-900 dark:hover:text-neutral-100 hover:bg-neutral-100 dark:hover:bg-neutral-900 transition-colors">
+              <i class="pi pi-search text-xs"></i>
             </button>
 
             <!-- Theme Toggle -->
-            <button (click)="toggleTheme()" title="Toggle Light/Dark Mode" class="w-10 h-10 rounded-xl border border-[#415b06]/20 dark:border-[#a89070]/20 flex items-center justify-center text-[#1e1a14] dark:text-[#f5efe6] hover:bg-[#415b06]/10 transition-all">
-              <i class="pi text-sm" [ngClass]="isDarkMode ? 'pi-moon' : 'pi-sun'"></i>
+            <button (click)="toggleTheme()" title="Toggle Theme" class="p-2 rounded-lg text-neutral-500 hover:text-neutral-900 dark:hover:text-neutral-100 hover:bg-neutral-100 dark:hover:bg-neutral-900 transition-colors">
+              <i class="pi text-xs" [ngClass]="isDarkMode ? 'pi-sun' : 'pi-moon'"></i>
             </button>
 
-            <!-- Mobile Hamburger Button -->
-            <button (click)="toggleMenu($event)" title="Navigation Menu" class="md:hidden w-10 h-10 rounded-xl border border-[#415b06]/20 dark:border-[#a89070]/20 flex items-center justify-center text-[#1e1a14] dark:text-[#f5efe6] hover:bg-[#415b06]/10 transition-all">
-              <i class="pi text-sm" [ngClass]="isMenuOpen ? 'pi-times' : 'pi-bars'"></i>
+            <!-- Mobile Menu Button -->
+            <button (click)="toggleMenu($event)" title="Menu" class="sm:hidden p-2 rounded-lg text-neutral-500 hover:text-neutral-900 dark:hover:text-neutral-100">
+              <i class="pi text-xs" [ngClass]="isMenuOpen ? 'pi-times' : 'pi-bars'"></i>
             </button>
           </div>
+
         </div>
       </header>
 
-      <!-- Main Content -->
-      <main class="flex-grow pt-24">
+      <!-- Mobile Dropdown Menu -->
+      <div *ngIf="isMenuOpen" 
+           (click)="$event.stopPropagation()"
+           class="fixed top-14 right-4 z-[120] w-48 bg-white/95 dark:bg-[#121212]/95 backdrop-blur-xl border border-neutral-200 dark:border-neutral-800 rounded-xl p-3 shadow-xl flex flex-col gap-1 sm:hidden text-xs font-mono">
+        <a href="#home" (click)="setActive('home'); closeMenu()" class="px-3 py-2 rounded-lg text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800">Home</a>
+        <a href="#about" (click)="setActive('about'); closeMenu()" class="px-3 py-2 rounded-lg text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800">Stack</a>
+        <a href="#experience" (click)="setActive('experience'); closeMenu()" class="px-3 py-2 rounded-lg text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800">Experience</a>
+        <a href="#projects" (click)="setActive('projects'); closeMenu()" class="px-3 py-2 rounded-lg text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800">Projects</a>
+        <a href="#contact" (click)="setActive('contact'); closeMenu()" class="px-3 py-2 rounded-lg text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800">Contact</a>
+        <div class="border-t border-neutral-200 dark:border-neutral-800 pt-1 mt-1">
+          <a href="assets/Saiteja_Database_Developer.pdf" target="_blank" (click)="closeMenu()" class="px-3 py-2 rounded-lg text-[#b38e2e] dark:text-[#dfc378] font-semibold flex items-center justify-between">
+            <span>Resume</span>
+            <i class="pi pi-download text-[10px]"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Main Content Container -->
+      <main class="flex-grow">
         <app-hero id="home"></app-hero>
         <app-about id="about"></app-about>
         <app-experience id="experience"></app-experience>
@@ -73,269 +106,207 @@ interface SearchItem {
         <app-contact id="contact"></app-contact>
       </main>
 
-      <!-- Footer -->
-      <footer class="border-t border-[#415b06]/15 dark:border-[#a89070]/15 py-10 bg-[#faf6f0]/60 dark:bg-[#14110d]/60 backdrop-blur-md relative z-10 text-xs text-[#a89070]">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 flex flex-col items-center justify-center text-center gap-2">
-          <div>&copy; 2026 Saiteja Athmakuri. Crafted with Angular.</div>
-          <div class="flex justify-center gap-5 text-[11px]">
-            <a href="https://linkedin.com/in/saitejaathmakuri/" target="_blank" class="hover:text-[#415b06] dark:hover:text-[#8bab2a] transition-colors font-medium">LinkedIn</a>
-            <a href="mailto:saitezathmakuri2003@gmail.com" class="hover:text-[#415b06] dark:hover:text-[#8bab2a] transition-colors font-medium">Email</a>
-            <a href="tel:+918309229402" class="hover:text-[#415b06] dark:hover:text-[#8bab2a] transition-colors font-medium">Phone</a>
+      <!-- Minimalist Footer -->
+      <footer class="border-t border-neutral-200/80 dark:border-neutral-800/80 py-8 text-xs font-mono text-neutral-500">
+        <div class="max-w-3xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div>&copy; 2026 Saiteja Athmakuri</div>
+          <div class="flex items-center gap-4">
+            <a href="https://linkedin.com/in/saitejaathmakuri/" target="_blank" class="hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors">LinkedIn</a>
+            <a href="https://github.com/SAITEJA-012" target="_blank" class="hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors">GitHub</a>
+            <a href="mailto:saitejaa.connect@gmail.com" class="hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors">Email</a>
           </div>
         </div>
       </footer>
 
-      <!-- Click-Outside Backdrop for Menu -->
-      <div *ngIf="isMenuOpen" class="fixed inset-0 z-40 bg-black/20 dark:bg-black/40 backdrop-blur-[2px] transition-opacity animate-fade-in" (click)="closeMenu()"></div>
-
-      <!-- Mobile Dropdown Popover Menu (Closes when clicked outside) -->
-      <div *ngIf="isMenuOpen" 
-           (click)="$event.stopPropagation()"
-           class="fixed top-20 right-4 sm:right-6 z-[120] w-64 bg-[#faf6f0]/95 dark:bg-[#14110d]/95 backdrop-blur-2xl border border-[#415b06]/20 dark:border-[#8bab2a]/30 rounded-3xl p-4 shadow-2xl flex flex-col gap-2 md:hidden animate-fade-in-down">
+      <!-- Search Modal -->
+      <div *ngIf="isSearchOpen" class="fixed inset-0 z-[150] flex items-start justify-center pt-[15vh] px-4">
+        <div class="absolute inset-0 bg-black/40 backdrop-blur-xs transition-opacity" (click)="closeSearch()"></div>
         
-        <div class="text-[10px] font-mono font-bold uppercase tracking-wider text-[#a89070] px-3 py-1 mb-1 border-b border-[#415b06]/10 dark:border-[#a89070]/10">
-          Navigation
-        </div>
-
-        <a href="#home" (click)="setActive('home'); closeMenu()" [ngClass]="activeSection === 'home' ? 'bg-[#415b06]/15 dark:bg-[#8bab2a]/20 text-[#415b06] dark:text-[#8bab2a] font-bold' : 'text-[#1e1a14] dark:text-[#f5efe6] hover:bg-[#415b06]/10'" class="px-3.5 py-2.5 rounded-2xl text-xs transition-all flex items-center justify-between">
-          <span>Home</span>
-          <i class="pi pi-home text-[10px] text-[#a89070]"></i>
-        </a>
-        <a href="#about" (click)="setActive('about'); closeMenu()" [ngClass]="activeSection === 'about' ? 'bg-[#415b06]/15 dark:bg-[#8bab2a]/20 text-[#415b06] dark:text-[#8bab2a] font-bold' : 'text-[#1e1a14] dark:text-[#f5efe6] hover:bg-[#415b06]/10'" class="px-3.5 py-2.5 rounded-2xl text-xs transition-all flex items-center justify-between">
-          <span>About</span>
-          <i class="pi pi-user text-[10px] text-[#a89070]"></i>
-        </a>
-        <a href="#experience" (click)="setActive('experience'); closeMenu()" [ngClass]="activeSection === 'experience' ? 'bg-[#415b06]/15 dark:bg-[#8bab2a]/20 text-[#415b06] dark:text-[#8bab2a] font-bold' : 'text-[#1e1a14] dark:text-[#f5efe6] hover:bg-[#415b06]/10'" class="px-3.5 py-2.5 rounded-2xl text-xs transition-all flex items-center justify-between">
-          <span>Experience</span>
-          <i class="pi pi-briefcase text-[10px] text-[#a89070]"></i>
-        </a>
-        <a href="#projects" (click)="setActive('projects'); closeMenu()" [ngClass]="activeSection === 'projects' ? 'bg-[#415b06]/15 dark:bg-[#8bab2a]/20 text-[#415b06] dark:text-[#8bab2a] font-bold' : 'text-[#1e1a14] dark:text-[#f5efe6] hover:bg-[#415b06]/10'" class="px-3.5 py-2.5 rounded-2xl text-xs transition-all flex items-center justify-between">
-          <span>Projects</span>
-          <i class="pi pi-folder text-[10px] text-[#a89070]"></i>
-        </a>
-        <a href="#contact" (click)="setActive('contact'); closeMenu()" [ngClass]="activeSection === 'contact' ? 'bg-[#415b06]/15 dark:bg-[#8bab2a]/20 text-[#415b06] dark:text-[#8bab2a] font-bold' : 'text-[#1e1a14] dark:text-[#f5efe6] hover:bg-[#415b06]/10'" class="px-3.5 py-2.5 rounded-2xl text-xs transition-all flex items-center justify-between">
-          <span>Contact</span>
-          <i class="pi pi-envelope text-[10px] text-[#a89070]"></i>
-        </a>
-        <div class="border-t border-[#415b06]/10 dark:border-[#a89070]/10 mt-1 pt-1.5">
-          <a href="assets/Saiteja_Database_Developer.pdf" target="_blank" (click)="closeMenu()" class="flex items-center justify-between px-3.5 py-2 rounded-2xl text-xs font-semibold bg-[#415b06]/10 text-[#415b06] dark:text-[#8bab2a] hover:bg-[#415b06]/20 transition-all">
-            <span class="flex items-center gap-2">
-              <i class="pi pi-file-pdf"></i>
-              <span>Resume</span>
-            </span>
-            <i class="pi pi-download text-[10px]"></i>
-          </a>
-        </div>
-      </div>
-
-      <!-- Interactive AI Search & Filter Modal -->
-      <div *ngIf="isSearchOpen" class="fixed inset-0 z-[60] flex items-start justify-center pt-[12vh] px-4">
-        <!-- Backdrop -->
-        <div class="absolute inset-0 bg-zinc-950/60 backdrop-blur-sm transition-opacity" (click)="closeSearch()"></div>
-        
-        <!-- Dialog -->
-        <div class="relative w-full max-w-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl shadow-2xl overflow-hidden animate-fade-in-down flex flex-col max-h-[75vh]">
+        <div class="relative w-full max-w-xl bg-white dark:bg-[#121212] border border-neutral-200 dark:border-neutral-800 rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[70vh] font-sans">
           
-          <!-- Search Header -->
-          <div class="flex items-center px-5 py-4 border-b border-zinc-200 dark:border-zinc-800 bg-zinc-50/50 dark:bg-zinc-900/50">
-            <i class="pi pi-search text-primary mr-3 text-lg"></i>
-            <input type="text" [(ngModel)]="searchQuery" (ngModelChange)="onSearchChange()" placeholder="Ask AI or search skills, projects, Shipconsole..." class="w-full bg-transparent border-none outline-none text-zinc-900 dark:text-white px-1 py-1 text-base placeholder-zinc-400 dark:placeholder-zinc-500 font-normal" autofocus>
-            <button *ngIf="searchQuery" (click)="clearSearch()" class="text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-200 mr-3 text-sm"><i class="pi pi-times-circle"></i></button>
-            <button (click)="closeSearch()" class="text-xs font-mono px-2 py-1 bg-zinc-200 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 rounded hover:bg-zinc-300 dark:hover:bg-zinc-700 transition-colors">ESC</button>
+          <div class="flex items-center px-4 py-3 border-b border-neutral-200 dark:border-neutral-800">
+            <i class="pi pi-search text-neutral-400 mr-2.5 text-sm"></i>
+            <input 
+              #searchInput 
+              type="text" 
+              [(ngModel)]="searchQuery" 
+              (ngModelChange)="onSearchChange()" 
+              placeholder="Search projects, skills, experience, or ask..." 
+              class="w-full bg-transparent border-none outline-none text-neutral-900 dark:text-neutral-100 text-sm placeholder-neutral-400 cursor-text caret-[#b38e2e] dark:caret-[#dfc378]" 
+              autofocus
+            >
+            <button (click)="closeSearch()" class="text-[11px] font-mono px-1.5 py-0.5 bg-neutral-100 dark:bg-neutral-800 text-neutral-500 rounded">ESC</button>
           </div>
 
-          <!-- Search Content Body -->
-          <div class="p-5 overflow-y-auto flex-grow space-y-6">
-            
-            <!-- Quick Prompts / Default Suggestions -->
-            <div *ngIf="!searchQuery" class="space-y-4">
-              <div class="text-xs font-semibold text-zinc-400 dark:text-zinc-500 uppercase tracking-wider flex items-center gap-2">
-                <i class="pi pi-sparkles text-primary"></i> Try asking or filtering:
-              </div>
-              <div class="flex flex-wrap gap-2">
-                <button *ngFor="let prompt of quickPrompts" (click)="setSearchQuery(prompt)" class="px-3 py-2 rounded-xl bg-zinc-100 dark:bg-zinc-800/80 hover:bg-primary/10 hover:text-primary dark:hover:bg-primary/20 dark:hover:text-primary text-zinc-700 dark:text-zinc-300 text-xs font-medium transition-all text-left border border-zinc-200/60 dark:border-zinc-700/60 flex items-center gap-2">
-                  <i class="pi pi-bolt text-[10px] text-primary"></i>
-                  <span>{{prompt}}</span>
+          <div class="p-4 overflow-y-auto space-y-3">
+            <div *ngIf="!searchQuery" class="space-y-2 text-xs">
+              <div class="text-[10px] font-mono uppercase text-neutral-400">Quick Searches</div>
+              <div class="flex flex-wrap gap-1.5">
+                <button *ngFor="let p of quickPrompts" (click)="setSearchQuery(p)" class="px-2.5 py-1 rounded-md bg-neutral-100 dark:bg-neutral-800/80 text-neutral-700 dark:text-neutral-300 hover:border-[#b38e2e] border border-transparent transition-all">
+                  {{ p }}
                 </button>
-              </div>
-
-              <div class="pt-4 border-t border-zinc-100 dark:border-zinc-800">
-                <div class="text-xs font-semibold text-zinc-400 dark:text-zinc-500 uppercase tracking-wider mb-3">Popular Navigation</div>
-                <div class="grid grid-cols-2 gap-3">
-                  <a href="#experience" (click)="closeSearch()" class="p-3 rounded-xl bg-zinc-50 dark:bg-zinc-800/40 border border-zinc-200/60 dark:border-zinc-800 hover:border-primary/50 transition-all block group">
-                    <div class="font-semibold text-zinc-800 dark:text-zinc-200 text-xs group-hover:text-primary flex items-center justify-between">
-                      <span>Shipconsole Experience</span>
-                      <i class="pi pi-arrow-right text-[10px]"></i>
-                    </div>
-                    <div class="text-[11px] text-zinc-500 mt-1">PL/SQL, AWS &amp; SaaS Migrations</div>
-                  </a>
-                  <a href="#projects" (click)="closeSearch()" class="p-3 rounded-xl bg-zinc-50 dark:bg-zinc-800/40 border border-zinc-200/60 dark:border-zinc-800 hover:border-primary/50 transition-all block group">
-                    <div class="font-semibold text-zinc-800 dark:text-zinc-200 text-xs group-hover:text-primary flex items-center justify-between">
-                      <span>AI &amp; ML Projects</span>
-                      <i class="pi pi-arrow-right text-[10px]"></i>
-                    </div>
-                    <div class="text-[11px] text-zinc-500 mt-1">Food AI, Traffic Surveillance, Spam ML</div>
-                  </a>
-                </div>
               </div>
             </div>
 
-            <!-- Filtered Results List -->
-            <div *ngIf="searchQuery && filteredResults.length > 0" class="space-y-3">
-              <div class="text-xs font-semibold text-zinc-400 dark:text-zinc-500 uppercase tracking-wider mb-2">
-                Found {{filteredResults.length}} matching item{{filteredResults.length > 1 ? 's' : ''}}
-              </div>
-              
-              <a *ngFor="let item of filteredResults" [href]="item.link" (click)="closeSearch()" class="block p-4 rounded-xl bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200/80 dark:border-zinc-800 hover:border-primary dark:hover:border-primary/80 transition-all group">
-                <div class="flex items-center justify-between mb-1">
-                  <span class="font-bold text-zinc-900 dark:text-white text-sm group-hover:text-primary transition-colors">{{item.title}}</span>
-                  <span class="text-[10px] font-mono px-2 py-0.5 bg-primary/10 text-primary rounded-md font-semibold">{{item.category}}</span>
+            <div *ngIf="searchQuery && filteredResults.length > 0" class="space-y-2">
+              <a *ngFor="let r of filteredResults" [href]="r.link" (click)="navigateToItem(r.link, $event)" class="block p-3 rounded-xl hover:bg-neutral-50 dark:hover:bg-neutral-800/60 border border-transparent hover:border-neutral-200 dark:hover:border-neutral-700 transition-all cursor-pointer">
+                <div class="flex items-center justify-between text-xs font-semibold text-neutral-900 dark:text-neutral-100">
+                  <span>{{ r.title }}</span>
+                  <span class="text-[10px] font-mono text-[#b38e2e] dark:text-[#dfc378]">{{ r.category }}</span>
                 </div>
-                <p class="text-xs text-zinc-600 dark:text-zinc-400 leading-relaxed">{{item.description}}</p>
+                <div class="text-[11px] text-neutral-500 mt-0.5">{{ r.description }}</div>
               </a>
             </div>
 
-            <!-- Empty State -->
-            <div *ngIf="searchQuery && filteredResults.length === 0" class="py-12 text-center space-y-3">
-              <div class="w-12 h-12 rounded-full bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center mx-auto text-zinc-400">
-                <i class="pi pi-inbox text-xl"></i>
-              </div>
-              <p class="text-sm font-semibold text-zinc-700 dark:text-zinc-300">No matching projects or skills found for "{{searchQuery}}"</p>
-              <p class="text-xs text-zinc-500 max-w-sm mx-auto">Try searching for keywords like <strong class="text-zinc-700 dark:text-zinc-300">SQL, AWS, Java, Python, Shipconsole, or AI</strong>.</p>
+            <div *ngIf="searchQuery && filteredResults.length === 0" class="py-8 text-center text-xs text-neutral-500">
+              No results found for "{{searchQuery}}"
             </div>
-
           </div>
-          
-          <!-- Modal Footer -->
-          <div class="px-5 py-3 border-t border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-950 flex items-center justify-between text-[11px] text-zinc-500">
-            <span>Powered by Saiteja's Knowledge Base</span>
-            <span class="hidden sm:inline">Use arrow keys or click to navigate</span>
-          </div>
-
         </div>
       </div>
 
-      <!-- Built-In Interactive AI Assistant Chatbot at Bottom Right -->
+      <!-- Built-In Minimalist Assistant -->
       <app-ai-assistant></app-ai-assistant>
     </div>
-  `,
-  styles: [`
-    @keyframes fadeInDown {
-      from { opacity: 0; transform: translateY(-10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    .animate-fade-in-down {
-      animation: fadeInDown 0.2s ease-out forwards;
-    }
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(10px) translateX(-50%); }
-      to { opacity: 1; transform: translateY(0) translateX(-50%); }
-    }
-    .animate-fade-in-up {
-      animation: fadeInUp 0.2s ease-out forwards;
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-    .animate-fade-in {
-      animation: fadeIn 0.15s ease-out forwards;
-    }
-  `]
+  `
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, AfterViewInit {
+  @ViewChild('searchInput') searchInput?: ElementRef<HTMLInputElement>;
+
   isDarkMode = false;
-  scrollProgress = 0;
   isSearchOpen = false;
   isMenuOpen = false;
-
+  activeSection = 'home';
   searchQuery = '';
   filteredResults: SearchItem[] = [];
 
   quickPrompts = [
-    'What is Saiteja\'s current database role?',
-    'Show Machine Learning & AI projects',
-    'List cloud and AWS certifications',
-    'What are Saiteja\'s core backend skills?'
+    'Featured Projects',
+    'Enterprise PL/SQL Migrations',
+    'Food AI Research (ICMDRI)',
+    'Java Spring Boot & AWS',
+    'Database Developer Experience'
   ];
 
   knowledgeBase: SearchItem[] = [
+    // --- Projects ---
     {
-      title: 'Database Developer & ERP Expert at Shipconsole',
-      category: 'Experience',
-      description: 'Current role driving client migrations from on-premise infrastructure to Cloud/SaaS environments using PL/SQL and AWS.',
-      link: '#experience',
-      keywords: ['shipconsole', 'database', 'developer', 'erp', 'pl/sql', 'sql', 'aws', 'cloud', 'saas', 'migration', 'current', 'work', 'job', 'role', 'experience']
-    },
-    {
-      title: 'Software Engineering Intern at Shipconsole',
-      category: 'Experience',
-      description: 'Gained hands-on expertise in PL/SQL, Spring, SpringBoot, AWS, Docker, and Git. Converted internship into a full-time role.',
-      link: '#experience',
-      keywords: ['intern', 'internship', 'shipconsole', 'spring', 'springboot', 'java', 'docker', 'git', 'conversion']
-    },
-    {
-      title: 'Java Full Stack Development Trainee at QSpiders',
-      category: 'Training',
-      description: 'Intensive training in Java OOP, Spring Boot backend development, JDBC, SQL database optimization, and frontend tech.',
-      link: '#experience',
-      keywords: ['qspiders', 'jspiders', 'java', 'full stack', 'training', 'oop', 'spring boot', 'jdbc', 'sql']
-    },
-    {
-      title: 'Web Development Intern at TechOctaNet Services',
-      category: 'Experience',
-      description: 'Developed and deployed responsive web interfaces using HTML5, CSS3, and JavaScript.',
-      link: '#experience',
-      keywords: ['techoctanet', 'octanet', 'web development', 'intern', 'html', 'css', 'javascript', 'frontend']
-    },
-    {
-      title: 'Library Management System Project',
+      title: 'Enterprise PL/SQL Migration Toolkit',
       category: 'Project',
-      description: 'Increased system efficiency by 35% with automated book issue/return tracking, fine calculation, and email notification modules using Java, MySQL, and JDBC.',
+      description: 'Production-ready PL/SQL procedures, cursors, and schema transformation engine built for zero-downtime AWS RDS migrations.',
       link: '#projects',
-      keywords: ['library', 'management', 'system', 'java', 'mysql', 'jdbc', 'project', 'backend', 'automation']
+      keywords: ['project', 'projects', 'pl/sql', 'oracle', 'sql', 'aws', 'rds', 'database', 'migration', 'etl', 'stored procedures', 'toolkit']
     },
     {
-      title: 'Food Recognition & Calorie Estimation using AI',
-      category: 'Project / Research',
-      description: 'Developed a CNN-based computer vision model with 92% accuracy using MobileNetV2. Published research paper at ICMDRI ranked in Top 15% for innovation.',
-      link: '#projects',
-      keywords: ['food', 'calorie', 'ai', 'cnn', 'mobilenetv2', 'tensorflow', 'keras', 'opencv', 'python', 'research', 'paper', 'icmdri', 'top 15%']
-    },
-    {
-      title: 'Real-Time Traffic Surveillance System',
+      title: 'Food AI & Calorie Estimation',
       category: 'Project',
-      description: 'Built a real-time traffic surveillance system using CNNs and YOLOv7 with 96% detection accuracy and 30% speed boost via multithreading.',
+      description: 'ICMDRI published research paper. Deep learning CNN with MobileNetV2 achieving 92% classification accuracy for nutritional estimation.',
       link: '#projects',
-      keywords: ['traffic', 'surveillance', 'yolov7', 'cnn', 'opencv', 'deep learning', 'computer vision', 'python', 'multithreading']
+      keywords: ['project', 'projects', 'food', 'ai', 'calorie', 'research', 'icmdri', 'mobilenetv2', 'cnn', 'python', 'tensorflow', 'opencv', 'machine learning']
     },
     {
-      title: 'Spam Classifier using Machine Learning',
+      title: 'Real-Time Traffic Surveillance',
       category: 'Project',
-      description: 'Developed an NLP spam detection system using Naïve Bayes and TF-IDF with 95% accuracy and 15% precision improvement via hyperparameter tuning.',
+      description: 'Computer vision vehicle density tracking pipeline leveraging YOLOv7 with multithreading and 96% mAP detection accuracy.',
       link: '#projects',
-      keywords: ['spam', 'classifier', 'nlp', 'natural language processing', 'naive bayes', 'tf-idf', 'machine learning', 'python', 'scikit-learn']
+      keywords: ['project', 'projects', 'traffic', 'surveillance', 'yolov7', 'opencv', 'vision', 'python', 'multithreading', 'cctv', 'analytics']
     },
     {
-      title: 'AWS Cloud Essentials Badge & Certifications',
-      category: 'Certification',
-      description: 'Certified by AWS (Cloud Essentials), IBM SkillsBuild (Intro to AI), Great Learning (Java), and ServiceNow (Micro-Certification).',
+      title: 'Library Automation & Management System',
+      category: 'Project',
+      description: 'Enterprise Java and MySQL institutional management system boosting fine calculation and issue/return efficiency by 35%.',
+      link: '#projects',
+      keywords: ['project', 'projects', 'library', 'java', 'mysql', 'jdbc', 'enterprise', 'management', 'sql optimization', 'backend']
+    },
+    {
+      title: 'Cloud-Native Task Management API',
+      category: 'Project',
+      description: 'RESTful microservices architecture built with Java Spring Boot and Angular, containerized with Docker on AWS EC2.',
+      link: '#projects',
+      keywords: ['project', 'projects', 'cloud', 'task', 'management', 'api', 'spring boot', 'java', 'angular', 'docker', 'aws', 'ec2', 'microservices']
+    },
+    {
+      title: 'Intelligent Spam Classifier',
+      category: 'Project',
+      description: 'Natural language processing engine using TF-IDF vectorization and ensemble learning with 98.4% precision.',
+      link: '#projects',
+      keywords: ['project', 'projects', 'spam', 'classifier', 'nlp', 'machine learning', 'python', 'scikit-learn', 'tf-idf']
+    },
+
+    // --- Experience ---
+    {
+      title: 'ShipConsole - Database Developer',
+      category: 'Experience',
+      description: 'Full-time role leading Oracle ERP database operations, writing robust PL/SQL packages, and executing zero-downtime AWS RDS cloud migrations.',
       link: '#experience',
-      keywords: ['aws', 'cloud', 'essentials', 'ibm', 'ai', 'service now', 'great learning', 'certification', 'license', 'badge']
+      keywords: ['experience', 'work', 'job', 'shipconsole', 'database', 'developer', 'oracle', 'pl/sql', 'aws', 'rds', 'current', 'full-time']
     },
+    {
+      title: 'ShipConsole - Software Engineering Intern',
+      category: 'Experience',
+      description: 'Engineered complex SQL queries and PL/SQL procedures, converting directly to full-time based on high delivery impact.',
+      link: '#experience',
+      keywords: ['experience', 'work', 'intern', 'internship', 'shipconsole', 'sql', 'queries']
+    },
+    {
+      title: 'QSpiders - Java Full Stack Trainee',
+      category: 'Experience',
+      description: 'Completed intensive full-stack engineering curriculum across Java 17, Spring Boot, MySQL, and Web Services.',
+      link: '#experience',
+      keywords: ['experience', 'training', 'qspiders', 'java', 'spring boot', 'trainee', 'full stack']
+    },
+
+    // --- Skills ---
+    {
+      title: 'Database Architecture & PL/SQL',
+      category: 'Skills',
+      description: 'Oracle PL/SQL, SQL query optimization, indexes, stored procedures, MySQL, and zero-downtime ETL.',
+      link: '#about',
+      keywords: ['skills', 'skill', 'stack', 'database', 'sql', 'pl/sql', 'oracle', 'mysql', 'tuning', 'indexing']
+    },
+    {
+      title: 'Backend & Java Engineering',
+      category: 'Skills',
+      description: 'Java 17+, Spring Boot, Hibernate JPA, RESTful APIs, OOP, and Microservices architecture.',
+      link: '#about',
+      keywords: ['skills', 'skill', 'stack', 'java', 'spring', 'spring boot', 'backend', 'rest', 'api', 'microservices']
+    },
+    {
+      title: 'Cloud & DevOps Toolkit',
+      category: 'Skills',
+      description: 'AWS (RDS, EC2), Docker containers, Git/GitHub, Linux environments, and CI/CD workflows.',
+      link: '#about',
+      keywords: ['skills', 'skill', 'stack', 'cloud', 'aws', 'rds', 'ec2', 'docker', 'devops', 'git']
+    },
+    {
+      title: 'Frontend & UI Technologies',
+      category: 'Skills',
+      description: 'Angular, TypeScript, Tailwind CSS, PrimeNG, JavaScript, responsive modern web design.',
+      link: '#about',
+      keywords: ['skills', 'skill', 'stack', 'frontend', 'angular', 'typescript', 'tailwind', 'javascript', 'html', 'css']
+    },
+
+    // --- Education, Resume & Contact ---
     {
       title: 'B.Tech in Computer Science (AI & ML)',
       category: 'Education',
-      description: 'Graduated from Siddhartha Institute of Engineering and Technology (2021-2025) with 7.39 CGPA.',
-      link: '#experience',
-      keywords: ['education', 'b.tech', 'siddhartha', 'college', 'degree', 'ai', 'ml', 'computer science', 'cgpa']
+      description: 'Siddhartha Institute of Technology & Science, Hyderabad (Graduated 2025).',
+      link: '#about',
+      keywords: ['education', 'college', 'degree', 'btech', 'cse', 'ai', 'ml', 'siddhartha']
     },
     {
-      title: 'Core Technical Skills & Toolkit',
-      category: 'Skills',
-      description: 'SQL, PL/SQL, MS SQL Server, MySQL, AWS Cloud, Docker, Java, Python, C, Spring Boot, Angular, HTML/CSS/JS, Power BI, Git.',
-      link: '#about',
-      keywords: ['skills', 'toolkit', 'sql', 'pl/sql', 'java', 'python', 'spring', 'angular', 'power bi', 'docker', 'aws', 'database', 'backend']
+      title: 'Official Resume / CV',
+      category: 'Resume',
+      description: 'View or download the latest resume for Saiteja Athmakuri (Database Developer & Software Engineer).',
+      link: 'assets/Saiteja_Database_Developer.pdf',
+      keywords: ['resume', 'cv', 'download resume', 'view resume', 'pdf', 'profile']
+    },
+    {
+      title: 'Get In Touch / Contact Saiteja',
+      category: 'Contact',
+      description: 'Email: saitejaa.connect@gmail.com | Phone: +91 8309229402 | Location: Hyderabad, India.',
+      link: '#contact',
+      keywords: ['contact', 'email', 'phone', 'reach', 'hire', 'whatsapp', 'linkedin', 'github', 'location', 'message']
     }
   ];
 
@@ -344,69 +315,43 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     if (isPlatformBrowser(this.platformId)) {
       const savedTheme = localStorage.getItem('theme');
-      if (savedTheme === 'dark') {
+      if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
         this.isDarkMode = true;
         document.documentElement.classList.add('p-dark', 'dark');
       } else {
         this.isDarkMode = false;
         document.documentElement.classList.remove('p-dark', 'dark');
       }
-
-      this.calculateScroll();
     }
   }
 
-  @HostListener('window:scroll')
-  onWindowScroll() {
-    this.calculateScroll();
-  }
-
-  activeSection = 'home';
-
-  setActive(section: string) {
-    this.activeSection = section;
-  }
-
-  @HostListener('window:keydown', ['$event'])
-  handleKeyboardEvent(event: KeyboardEvent) {
-    if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === 'k') {
-      event.preventDefault();
-      this.openSearch();
-    }
-    if (event.key === 'Escape') {
-      if (this.isSearchOpen) this.closeSearch();
-      if (this.isMenuOpen) this.closeMenu();
-    }
-  }
-
-  calculateScroll() {
+  ngAfterViewInit(): void {
     if (isPlatformBrowser(this.platformId)) {
-      const scrollPosition = window.scrollY;
-      const windowHeight = window.innerHeight;
-      const documentHeight = document.documentElement.scrollHeight;
-      const totalScrollable = documentHeight - windowHeight;
-      
-      if (totalScrollable > 0) {
-        this.scrollProgress = (scrollPosition / totalScrollable) * 100;
-      } else {
-        this.scrollProgress = 100;
-      }
-
-      if (scrollPosition + windowHeight >= documentHeight - 50) {
-        this.activeSection = 'contact';
-        return;
-      }
-
-      const sections = ['home', 'about', 'experience', 'projects', 'contact'];
-      const scrollPos = window.scrollY + windowHeight / 3;
-      for (const sec of sections) {
-        const el = document.getElementById(sec);
-        if (el && scrollPos >= el.offsetTop && scrollPos < el.offsetTop + el.offsetHeight) {
-          this.activeSection = sec;
-          break;
-        }
-      }
+      this.initScrollReveal();
     }
+  }
+
+  private initScrollReveal(): void {
+    if (typeof IntersectionObserver === 'undefined') {
+      document.querySelectorAll('.scroll-reveal').forEach(el => el.classList.add('is-visible'));
+      return;
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+        }
+      });
+    }, {
+      root: null,
+      threshold: 0.08,
+      rootMargin: '0px 0px -40px 0px'
+    });
+
+    setTimeout(() => {
+      document.querySelectorAll('.scroll-reveal').forEach(el => observer.observe(el));
+    }, 60);
   }
 
   toggleTheme() {
@@ -420,50 +365,104 @@ export class AppComponent implements OnInit {
     }
   }
 
+  setActive(section: string) {
+    this.activeSection = section;
+  }
+
+  toggleMenu(event: Event) {
+    event.stopPropagation();
+    this.isMenuOpen = !this.isMenuOpen;
+  }
+
+  closeMenu() {
+    this.isMenuOpen = false;
+  }
+
   openSearch() {
     this.isSearchOpen = true;
-    this.isMenuOpen = false;
     this.searchQuery = '';
     this.filteredResults = [];
+    setTimeout(() => {
+      this.searchInput?.nativeElement?.focus();
+    }, 50);
   }
 
   closeSearch() {
     this.isSearchOpen = false;
   }
 
-  setSearchQuery(query: string) {
-    this.searchQuery = query;
+  setSearchQuery(q: string) {
+    this.searchQuery = q;
     this.onSearchChange();
   }
 
-  clearSearch() {
-    this.searchQuery = '';
-    this.filteredResults = [];
-  }
-
   onSearchChange() {
-    const q = this.searchQuery.trim().toLowerCase();
-    if (!q) {
+    const raw = this.searchQuery.toLowerCase().trim();
+    if (!raw) {
       this.filteredResults = [];
       return;
     }
+
+    // Stop words filter for natural conversational queries
+    const stopWords = new Set(['a', 'an', 'the', 'and', 'or', 'in', 'on', 'at', 'to', 'for', 'of', 'with', 'by', 'me', 'my', 'his', 'is', 'are', 'show', 'tell', 'find', 'get', 'what', 'which', 'who', 'how', 'about']);
+    const tokens = raw
+      .replace(/[^\w\s\/-]/g, ' ')
+      .split(/\s+/)
+      .filter(t => t.length > 0 && !stopWords.has(t));
+
+    const queryTokens = tokens.length > 0 ? tokens : [raw];
+
     this.filteredResults = this.knowledgeBase.filter(item => {
-      const inTitle = item.title.toLowerCase().includes(q);
-      const inDesc = item.description.toLowerCase().includes(q);
-      const inCat = item.category.toLowerCase().includes(q);
-      const inKeys = item.keywords.some(k => k.toLowerCase().includes(q));
-      return inTitle || inDesc || inCat || inKeys;
+      const title = item.title.toLowerCase();
+      const desc = item.description.toLowerCase();
+      const cat = item.category.toLowerCase();
+      const keywords = item.keywords.map(k => k.toLowerCase());
+
+      // 1. Direct match on raw query
+      if (title.includes(raw) || desc.includes(raw) || cat.includes(raw) || keywords.some(k => k.includes(raw))) {
+        return true;
+      }
+
+      // 2. Plural / singular normalization (e.g. 'projects' -> 'project', 'skills' -> 'skill')
+      const normalizedRaw = raw.endsWith('s') ? raw.slice(0, -1) : raw;
+      if (normalizedRaw.length > 2 && (title.includes(normalizedRaw) || desc.includes(normalizedRaw) || cat.includes(normalizedRaw) || keywords.some(k => k.includes(normalizedRaw)))) {
+        return true;
+      }
+
+      // 3. Token-based matching
+      return queryTokens.some(token => {
+        const normToken = token.endsWith('s') ? token.slice(0, -1) : token;
+        return title.includes(token) || 
+               desc.includes(token) || 
+               cat.includes(token) || 
+               keywords.some(k => k.includes(token) || (normToken.length > 2 && k.includes(normToken)));
+      });
     });
   }
 
-  toggleMenu(event?: Event) {
-    if (event) {
-      event.stopPropagation();
+  navigateToItem(link: string, event?: Event) {
+    if (event) event.preventDefault();
+    this.closeSearch();
+    if (link.startsWith('#')) {
+      const sectionId = link.substring(1);
+      this.setActive(sectionId);
+      const el = document.getElementById(sectionId);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth' });
+      }
+    } else {
+      window.open(link, '_blank');
     }
-    this.isMenuOpen = !this.isMenuOpen;
   }
 
-  closeMenu() {
-    this.isMenuOpen = false;
+  @HostListener('document:keydown.escape')
+  onEscape() {
+    this.closeSearch();
+    this.closeMenu();
+  }
+
+  @HostListener('document:click')
+  onDocClick() {
+    this.closeMenu();
   }
 }

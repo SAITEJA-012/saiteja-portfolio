@@ -6,79 +6,88 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CommonModule],
   template: `
-    <section id="contact" class="py-20 relative">
-      <div class="max-w-6xl mx-auto px-4 sm:px-6">
+    <section id="contact" class="py-16 md:py-20 border-t border-neutral-200/80 dark:border-neutral-800/80 relative">
+      <div class="max-w-3xl mx-auto px-4 sm:px-6">
         
-        <!-- Ameya Jarvis Section Header -->
-        <div class="text-center mb-14">
-          <div class="text-xs font-mono font-bold text-[#415b06] dark:text-[#8bab2a] uppercase tracking-widest mb-2">
-            LET'S CONNECT
+        <!-- Section Header -->
+        <div class="mb-8 scroll-reveal">
+          <div class="text-[11px] font-mono uppercase tracking-widest text-neutral-500 dark:text-neutral-400 mb-1">
+            04 // CONNECT
           </div>
-          <h2 class="text-3xl sm:text-4xl font-extrabold text-[#1e1a14] dark:text-[#f5efe6] mb-3">
+          <h2 class="text-2xl sm:text-3xl font-semibold tracking-tight text-neutral-900 dark:text-neutral-100 mb-2">
             Get In Touch
           </h2>
-          <p class="text-sm sm:text-base text-[#4a3e2e] dark:text-[#d6cab8] max-w-2xl mx-auto leading-relaxed">
-            Have a database migration project in mind, looking for a full-stack engineer, or want to connect? Send a message below.
+          <p class="text-xs sm:text-sm text-neutral-600 dark:text-neutral-400 max-w-lg leading-relaxed">
+            I am always open to discussing enterprise database engineering, cloud migrations, or full-stack software development.
           </p>
         </div>
-        
-        <!-- Ameya Jarvis Style Contact Cards Grid -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 max-w-5xl mx-auto">
+
+        <!-- Contact Links Stack -->
+        <div class="space-y-3 font-mono text-xs">
           
-          <!-- Card 1: LinkedIn -->
-          <a href="https://linkedin.com/in/saitejaathmakuri/" target="_blank" class="p-6 rounded-3xl bg-[#faf6f0]/80 dark:bg-[#16120e]/80 border border-[#415b06]/20 dark:border-[#a89070]/20 hover:border-[#415b06] dark:hover:border-[#8bab2a] transition-all duration-300 transform hover:-translate-y-2 flex flex-col justify-between group shadow-lg hover:shadow-2xl hover-flash">
-            <div class="flex items-center justify-between mb-6">
-              <div class="w-12 h-12 rounded-2xl bg-[#415b06]/10 dark:bg-[#8bab2a]/15 text-[#415b06] dark:text-[#8bab2a] flex items-center justify-center font-bold text-lg">
+          <!-- Email with Copy Button -->
+          <div class="p-4 rounded-xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900/60 flex items-center justify-between scroll-reveal stagger-1">
+            <div>
+              <div class="text-[10px] text-neutral-400 uppercase tracking-wider">Email</div>
+              <a href="mailto:saitejaa.connect@gmail.com" class="text-sm font-semibold text-neutral-900 dark:text-neutral-100 hover:text-[#b38e2e] dark:hover:text-[#dfc378] transition-colors">
+                saitejaa.connect&#64;gmail.com
+              </a>
+            </div>
+            <button (click)="copyEmail()" 
+                    class="px-2.5 py-1 rounded-md text-[11px] border border-neutral-300 dark:border-neutral-700 hover:border-[#b38e2e] dark:hover:border-[#dfc378] transition-colors flex items-center gap-1.5 text-neutral-700 dark:text-neutral-300">
+              <i class="pi" [ngClass]="copied ? 'pi-check text-emerald-500' : 'pi-copy text-[10px]'"></i>
+              <span>{{ copied ? 'Copied' : 'Copy' }}</span>
+            </button>
+          </div>
+
+          <!-- Phone & Location Row -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 scroll-reveal stagger-2">
+            <a href="tel:+918309229402" class="p-4 rounded-xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900/60 hover:border-[#b38e2e] dark:hover:border-[#dfc378] transition-colors block group">
+              <div class="text-[10px] text-neutral-400 uppercase tracking-wider flex items-center justify-between">
+                <span>Phone / WhatsApp</span>
+                <i class="pi pi-arrow-up-right text-[10px] text-neutral-400 group-hover:text-[#b38e2e] dark:group-hover:text-[#dfc378]"></i>
+              </div>
+              <div class="text-sm font-semibold text-neutral-900 dark:text-neutral-100 group-hover:text-[#b38e2e] dark:group-hover:text-[#dfc378] transition-colors mt-0.5">
+                +91 8309229402
+              </div>
+            </a>
+
+            <div class="p-4 rounded-xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900/60">
+              <div class="text-[10px] text-neutral-400 uppercase tracking-wider">Location</div>
+              <div class="text-sm font-semibold text-neutral-900 dark:text-neutral-100 mt-0.5">
+                Hyderabad, India &bull; IST
+              </div>
+            </div>
+          </div>
+
+          <!-- Social Links Row -->
+          <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 pt-2 scroll-reveal stagger-3">
+            <a href="https://linkedin.com/in/saitejaathmakuri/" target="_blank" 
+               class="p-3 rounded-xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900/60 hover:border-[#b38e2e] dark:hover:border-[#dfc378] transition-colors flex items-center justify-between text-neutral-800 dark:text-neutral-200 group">
+              <span class="flex items-center gap-2">
                 <i class="pi pi-linkedin"></i>
-              </div>
-              <i class="pi pi-arrow-up-right text-xs text-[#a89070] group-hover:text-[#415b06] dark:group-hover:text-[#8bab2a] transition-colors"></i>
-            </div>
-            <div>
-              <div class="text-[11px] font-mono font-bold text-[#a89070] dark:text-[#b9ab95] uppercase tracking-wider">LinkedIn</div>
-              <div class="font-bold text-[#1e1a14] dark:text-[#f5efe6] group-hover:text-[#415b06] dark:group-hover:text-[#8bab2a] transition-colors text-sm mt-1">saitejaathmakuri</div>
-            </div>
-          </a>
+                <span class="text-xs font-medium">LinkedIn</span>
+              </span>
+              <i class="pi pi-arrow-up-right text-[10px] text-neutral-400 group-hover:text-[#b38e2e] dark:group-hover:text-[#dfc378]"></i>
+            </a>
 
-          <!-- Card 2: Email -->
-          <a href="mailto:saitezathmakuri2003@gmail.com" class="p-6 rounded-3xl bg-[#faf6f0]/80 dark:bg-[#16120e]/80 border border-[#415b06]/20 dark:border-[#a89070]/20 hover:border-[#415b06] dark:hover:border-[#8bab2a] transition-all duration-300 transform hover:-translate-y-2 flex flex-col justify-between group shadow-lg hover:shadow-2xl hover-flash">
-            <div class="flex items-center justify-between mb-6">
-              <div class="w-12 h-12 rounded-2xl bg-[#415b06]/10 dark:bg-[#8bab2a]/15 text-[#415b06] dark:text-[#8bab2a] flex items-center justify-center font-bold text-lg">
-                <i class="pi pi-envelope"></i>
-              </div>
-              <i class="pi pi-arrow-up-right text-xs text-[#a89070] group-hover:text-[#415b06] dark:group-hover:text-[#8bab2a] transition-colors"></i>
-            </div>
-            <div>
-              <div class="text-[11px] font-mono font-bold text-[#a89070] dark:text-[#b9ab95] uppercase tracking-wider">Email Me</div>
-              <div class="font-bold text-[#1e1a14] dark:text-[#f5efe6] group-hover:text-[#415b06] dark:group-hover:text-[#8bab2a] transition-colors text-xs mt-1 truncate" title="saitezathmakuri2003@gmail.com">saitezathmakuri2003&#64;gmail.com</div>
-            </div>
-          </a>
+            <a href="https://github.com/SAITEJA-012" target="_blank" 
+               class="p-3 rounded-xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900/60 hover:border-[#b38e2e] dark:hover:border-[#dfc378] transition-colors flex items-center justify-between text-neutral-800 dark:text-neutral-200 group">
+              <span class="flex items-center gap-2">
+                <i class="pi pi-github"></i>
+                <span class="text-xs font-medium">GitHub</span>
+              </span>
+              <i class="pi pi-arrow-up-right text-[10px] text-neutral-400 group-hover:text-[#b38e2e] dark:group-hover:text-[#dfc378]"></i>
+            </a>
 
-          <!-- Card 3: Phone -->
-          <a href="tel:+918309229402" class="p-6 rounded-3xl bg-[#faf6f0]/80 dark:bg-[#16120e]/80 border border-[#415b06]/20 dark:border-[#a89070]/20 hover:border-[#415b06] dark:hover:border-[#8bab2a] transition-all duration-300 transform hover:-translate-y-2 flex flex-col justify-between group shadow-lg hover:shadow-2xl hover-flash">
-            <div class="flex items-center justify-between mb-6">
-              <div class="w-12 h-12 rounded-2xl bg-[#415b06]/10 dark:bg-[#8bab2a]/15 text-[#415b06] dark:text-[#8bab2a] flex items-center justify-center font-bold text-lg">
-                <i class="pi pi-phone"></i>
-              </div>
-              <i class="pi pi-arrow-up-right text-xs text-[#a89070] group-hover:text-[#415b06] dark:group-hover:text-[#8bab2a] transition-colors"></i>
-            </div>
-            <div>
-              <div class="text-[11px] font-mono font-bold text-[#a89070] dark:text-[#b9ab95] uppercase tracking-wider">Call Me</div>
-              <div class="font-bold text-[#1e1a14] dark:text-[#f5efe6] group-hover:text-[#415b06] dark:group-hover:text-[#8bab2a] transition-colors text-sm mt-1">+91 8309229402</div>
-            </div>
-          </a>
-
-          <!-- Card 4: Location -->
-          <div class="p-6 rounded-3xl bg-[#faf6f0]/80 dark:bg-[#16120e]/80 border border-[#415b06]/20 dark:border-[#a89070]/20 hover:border-[#415b06] dark:hover:border-[#8bab2a] transition-all duration-300 transform hover:-translate-y-2 flex flex-col justify-between shadow-lg hover:shadow-2xl hover-flash">
-            <div class="flex items-center justify-between mb-6">
-              <div class="w-12 h-12 rounded-2xl bg-[#415b06]/10 dark:bg-[#8bab2a]/15 text-[#415b06] dark:text-[#8bab2a] flex items-center justify-center font-bold text-lg">
-                <i class="pi pi-map-marker"></i>
-              </div>
-              <span class="text-[10px] font-mono px-2 py-0.5 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 rounded-full font-bold">Available</span>
-            </div>
-            <div>
-              <div class="text-[11px] font-mono font-bold text-[#a89070] dark:text-[#b9ab95] uppercase tracking-wider">Location</div>
-              <div class="font-bold text-[#1e1a14] dark:text-[#f5efe6] text-sm mt-1">Hyderabad, India</div>
-            </div>
+            <a href="assets/Saiteja_Database_Developer.pdf" target="_blank" rel="noopener noreferrer"
+               class="p-3 rounded-xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900/60 hover:border-[#b38e2e] dark:hover:border-[#dfc378] transition-colors flex items-center justify-between text-neutral-800 dark:text-neutral-200 group col-span-2 sm:col-span-1">
+              <span class="flex items-center gap-2">
+                <i class="pi pi-file-pdf text-[#b38e2e] dark:text-[#dfc378]"></i>
+                <span class="text-xs font-medium">Resume</span>
+              </span>
+              <i class="pi pi-arrow-up-right text-[10px] text-neutral-400 group-hover:text-[#b38e2e] dark:group-hover:text-[#dfc378]"></i>
+            </a>
           </div>
 
         </div>
@@ -87,4 +96,14 @@ import { CommonModule } from '@angular/common';
     </section>
   `
 })
-export class ContactComponent {}
+export class ContactComponent {
+  copied = false;
+
+  copyEmail(): void {
+    navigator.clipboard.writeText('saitejaa.connect@gmail.com');
+    this.copied = true;
+    setTimeout(() => {
+      this.copied = false;
+    }, 2000);
+  }
+}

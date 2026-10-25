@@ -3,59 +3,52 @@
 @tailwind utilities;
 @import "primeicons/primeicons.css";
 
+/* ==========================================================================
+   MINIMALIST MONOCHROME & GOLD DESIGN SYSTEM
+   Inspired by Ashish Gogula, Linear, & Vercel editorial craft.
+   Palette: Pitch Black, Soft Off-White/Charcoal, and Warm Muted Gold (#c8a951 / #dfc378)
+   ========================================================================== */
+
 :root {
-    --oat: #f0e6da;
-    --oat-light: #faf6f0;
-    --oat-dark: #ddd0bf;
-    --oat-deep: #c9b49a;
-    --olive: #415b06;
-    --olive-rgb: 65, 91, 6;
-    --olive-mid: #557210;
-    --olive-light: #6a8c1a;
-    --olive-dark: #293803;
-    --bark: #1e1a14;
-    --sand: #a89070;
-    --cream: #faf6f0;
-    --color-bg: var(--oat);
-    --color-bg-alt: var(--oat-dark);
-    --color-surface: hsla(33, 42%, 90%, .72);
-    --color-primary: var(--olive);
-    --color-text: var(--bark);
-    --color-text-mid: #4a3e2e;
-    --color-text-muted: var(--sand);
-    --color-border: rgba(65, 91, 6, .16);
-    --color-accent: #8bab2a;
-    --primary-color: #415b06;
-    --shadow-xs: 0 1px 4px rgba(41, 56, 3, .08);
-    --shadow-sm: 0 2px 12px rgba(41, 56, 3, .1);
-    --shadow-md: 0 8px 32px rgba(41, 56, 3, .12);
-    --shadow-lg: 0 24px 64px rgba(41, 56, 3, .16);
-    --shadow-glow: 0 0 48px rgba(65, 91, 6, .2);
-    --r-sm: 8px;
-    --r-md: 14px;
-    --r-lg: 22px;
-    --r-xl: 32px;
-    --r-full: 9999px;
+    --gold: #b38e2e;
+    --gold-light: #d4af37;
+    --gold-bright: #dfc378;
+    --gold-rgb: 179, 142, 46;
+
+    --bg-page: #faf9f6;
+    --bg-surface: #ffffff;
+    --bg-surface-subtle: #f4f3ef;
+    --border-color: rgba(0, 0, 0, 0.08);
+    --border-hover: rgba(179, 142, 46, 0.4);
+
+    --text-primary: #121212;
+    --text-secondary: #5a5a58;
+    --text-muted: #8c8c88;
+
+    --color-bg: var(--bg-page);
+    --color-text: var(--text-primary);
+    --primary-color: var(--gold);
 }
 
 .p-dark {
-    --oat: #14110d;
-    --oat-light: #1c1813;
-    --oat-dark: #0f0d0a;
-    --oat-deep: #2a241c;
-    --bark: #f5efe6;
-    --sand: #b9ab95;
-    --cream: #14110d;
-    --color-bg: #0e0b09;
-    --color-bg-alt: #15120f;
-    --color-surface: rgba(22, 18, 14, .75);
-    --color-text: #f5efe6;
-    --color-text-mid: #d6cab8;
-    --color-text-muted: #b9ab95;
-    --color-border: hsla(33, 30%, 70%, .2);
-    --color-primary: #8bab2a;
-    --color-accent: #8bab2a;
-    --primary-color: #8bab2a;
+    --gold: #dfc378;
+    --gold-light: #f3df9b;
+    --gold-bright: #f9ecc2;
+    --gold-rgb: 223, 195, 120;
+
+    --bg-page: #0a0a0a;
+    --bg-surface: #121212;
+    --bg-surface-subtle: #181818;
+    --border-color: rgba(255, 255, 255, 0.09);
+    --border-hover: rgba(223, 195, 120, 0.45);
+
+    --text-primary: #ededed;
+    --text-secondary: #a1a1a0;
+    --text-muted: #6e6e6c;
+
+    --color-bg: var(--bg-page);
+    --color-text: var(--text-primary);
+    --primary-color: var(--gold);
 }
 
 *, :after, :before {
@@ -66,8 +59,9 @@
 
 html {
     scroll-behavior: smooth;
-    font-size: 16px;
-    font-family: "Sora", system-ui, -apple-system, sans-serif;
+    font-size: 15px;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    letter-spacing: -0.011em;
 }
 
 body {
@@ -76,59 +70,58 @@ body {
     min-height: 100vh;
     overflow-x: hidden;
     line-height: 1.65;
-    transition: background-color 0.35s ease, color 0.35s ease;
+    transition: background-color 0.25s ease, color 0.25s ease;
 }
 
-/* Override dark mode body background to Ameya Jarvis Warm Dark Oat (#0e0b09) */
 .p-dark body {
-    background-color: #0e0b09 !important;
-    color: #f5efe6;
+    background-color: #0a0a0a !important;
+    color: #ededed;
 }
 
-/* Minimalist scrollbar exactly as in user recording */
+/* Minimalist Scrollbar */
 ::-webkit-scrollbar {
-    width: 5px;
+    width: 4px;
 }
 ::-webkit-scrollbar-thumb {
-    background: var(--olive-mid);
-    border-radius: var(--r-full);
+    background: rgba(179, 142, 46, 0.25);
+    border-radius: 9999px;
+}
+.p-dark ::-webkit-scrollbar-thumb {
+    background: rgba(223, 195, 120, 0.25);
 }
 ::-webkit-scrollbar-track {
-    background: var(--oat-dark);
-}
-::-webkit-scrollbar-thumb:hover {
-    background: var(--olive);
+    background: transparent;
 }
 
-/* Classy Grid & Radial Glow background (Ameya Jarvis Style) */
-.bg-grid-pattern {
-    background-image: 
-      radial-gradient(ellipse 80% 50% at 15% -8%, rgba(65, 91, 6, 0.08) 0%, transparent 70%),
-      radial-gradient(ellipse 60% 45% at 85% 105%, rgba(65, 91, 6, 0.06) 0%, transparent 70%),
-      linear-gradient(to right, rgba(65, 91, 6, 0.04) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(65, 91, 6, 0.04) 1px, transparent 1px);
-    background-size: 100% 100%, 100% 100%, 80px 80px, 80px 80px;
-    background-position: center top;
+.no-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+.no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
 }
 
-.p-dark .bg-grid-pattern {
-    background-image: 
-      radial-gradient(ellipse 80% 50% at 15% -8%, rgba(106, 140, 26, 0.12) 0%, transparent 70%),
-      radial-gradient(ellipse 60% 45% at 85% 105%, rgba(65, 91, 6, 0.08) 0%, transparent 70%),
-      linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+/* Subtle, ultra-clean background dots pattern */
+.bg-minimal-dots {
+    background-image: radial-gradient(rgba(0, 0, 0, 0.07) 1px, transparent 1px);
+    background-size: 24px 24px;
 }
 
-/* Custom styles for glowing dot */
-.online-dot {
+.p-dark .bg-minimal-dots {
+    background-image: radial-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+    background-size: 24px 24px;
+}
+
+/* Subtle gold pulse dot */
+.gold-pulse-dot {
     position: relative;
     display: inline-block;
-    width: 8px;
-    height: 8px;
-    background-color: #6a8c1a;
+    width: 6px;
+    height: 6px;
+    background-color: #dfc378;
     border-radius: 50%;
 }
-.online-dot::after {
+.gold-pulse-dot::after {
     content: '';
     position: absolute;
     top: 0;
@@ -136,30 +129,49 @@ body {
     width: 100%;
     height: 100%;
     border-radius: 50%;
-    background-color: #6a8c1a;
-    animation: pulse-glow 2s infinite ease-in-out;
+    background-color: #dfc378;
+    animation: gold-pulse 2s infinite ease-in-out;
 }
-@keyframes pulse-glow {
+@keyframes gold-pulse {
     0% { transform: scale(1); opacity: 0.8; }
-    100% { transform: scale(3); opacity: 0; }
-}
-
-/* Cursive / editorial text utility */
-.font-cursive-style {
-    font-family: 'Dancing Script', 'Playfair Display', cursive, serif;
-}
-
-/* Interactive Hover Flash Effect (Sweeping Shine from Start to End) */
-/* Removed lighting effect - sleek Apple Store style subtle lift only */
-
-.font-caveat {
-    font-family: 'Caveat', cursive !important;
+    100% { transform: scale(2.8); opacity: 0; }
 }
 
 body {
-    font-family: 'Inter', sans-serif;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
-h1, h2, h3, h4, h5, h6, .font-heading {
-    font-family: 'Space Grotesk', sans-serif;
+code, kbd, pre, .font-mono {
+    font-family: 'JetBrains Mono', monospace;
+}
+
+/* ==========================================================================
+   SCROLL REVEAL ANIMATIONS (Smooth bottom-to-top entrance)
+   ========================================================================== */
+.scroll-reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1), transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform;
+}
+
+.scroll-reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Staggered cascading delays */
+.stagger-1 { transition-delay: 0.06s; }
+.stagger-2 { transition-delay: 0.12s; }
+.stagger-3 { transition-delay: 0.18s; }
+.stagger-4 { transition-delay: 0.24s; }
+.stagger-5 { transition-delay: 0.30s; }
+.stagger-6 { transition-delay: 0.36s; }
+
+@media (prefers-reduced-motion: reduce) {
+    .scroll-reveal {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+    }
 }

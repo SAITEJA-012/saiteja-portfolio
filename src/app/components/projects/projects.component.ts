@@ -9,6 +9,7 @@ interface Project {
   description: string;
   tech: string[];
   githubUrl: string;
+  liveUrl?: string;
 }
 
 @Component({
@@ -45,7 +46,11 @@ interface Project {
                 </span>
               </div>
 
-              <span class="text-xs font-mono font-medium text-[#b38e2e] dark:text-[#dfc378]">
+              <button *ngIf="p.liveUrl" (click)="refreshPortfolio($event)" title="Refresh Portfolio"
+                 class="text-[#b38e2e] dark:text-[#dfc378] hover:scale-110 transition-transform p-0.5 flex items-center justify-center cursor-pointer">
+                <i class="pi pi-eye text-base"></i>
+              </button>
+              <span *ngIf="!p.liveUrl" class="text-xs font-mono font-medium text-[#b38e2e] dark:text-[#dfc378]">
                 {{ p.metric }}
               </span>
             </div>
@@ -62,10 +67,10 @@ interface Project {
                 </span>
               </div>
 
-              <a [href]="p.githubUrl" target="_blank" 
-                 class="font-mono text-xs text-neutral-700 dark:text-neutral-300 hover:text-[#b38e2e] dark:hover:text-[#dfc378] flex items-center gap-1 transition-colors">
+              <a [href]="p.githubUrl" target="_blank" title="View Code on GitHub"
+                 class="font-mono text-xs text-neutral-700 dark:text-neutral-300 hover:text-[#b38e2e] dark:hover:text-[#dfc378] flex items-center gap-1 transition-colors group/code shrink-0 ml-2">
                 <span>Code</span>
-                <i class="pi pi-arrow-up-right text-[10px]"></i>
+                <i class="pi pi-arrow-up-right text-[10px] transition-transform group-hover/code:-translate-y-0.5 group-hover/code:translate-x-0.5"></i>
               </a>
             </div>
 
@@ -86,7 +91,33 @@ interface Project {
   `
 })
 export class ProjectsComponent {
+  refreshPortfolio(event: Event): void {
+    event.preventDefault();
+    event.stopPropagation();
+    if (typeof window !== 'undefined') {
+      if ('scrollRestoration' in history) {
+        history.scrollRestoration = 'manual';
+      }
+      try {
+        sessionStorage.setItem('scrollToTopOnRefresh', 'true');
+        history.replaceState(null, '', window.location.pathname);
+      } catch (e) {}
+      window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+      window.location.reload();
+    }
+  }
+
   projects: Project[] = [
+    {
+      title: 'Saiteja Developer Portfolio & AI Assistant',
+      tagline: 'Angular 21 & Conversational AI',
+      category: 'Frontend & AI',
+      metric: '',
+      description: 'High-performance minimalist portfolio featuring interactive star-field canvas physics, custom cursor animations, and a conversational AI Assistant with serverless email dispatch.',
+      tech: ['Angular 21', 'TypeScript', 'Tailwind CSS', 'Vercel'],
+      githubUrl: 'https://github.com/SAITEJA-012/saiteja-portfolio',
+      liveUrl: 'https://saitejaathmakuri.vercel.app'
+    },
     {
       title: 'Enterprise PL/SQL Migration Toolkit',
       tagline: 'Zero-Downtime Data Architecture',
@@ -121,15 +152,6 @@ export class ProjectsComponent {
       metric: '+35% Efficiency',
       description: 'Institutional automation system integrating automated book issue/return tracking, algorithmic fine calculation, and notification dispatch using Java and MySQL.',
       tech: ['Java', 'MySQL', 'JDBC', 'SQL Optimization'],
-      githubUrl: 'https://github.com/SAITEJA-012'
-    },
-    {
-      title: 'Cloud-Native Task Management API',
-      tagline: 'RESTful Microservices',
-      category: 'Microservices',
-      metric: 'AWS Deployed',
-      description: 'Full-stack RESTful microservices architecture built with Java Spring Boot and Angular, containerized with Docker and orchestrated on AWS EC2.',
-      tech: ['Java Spring Boot', 'Angular', 'Docker', 'AWS EC2'],
       githubUrl: 'https://github.com/SAITEJA-012'
     },
     {

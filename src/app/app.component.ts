@@ -219,11 +219,11 @@ export class AppComponent implements OnInit, AfterViewInit {
       keywords: ['project', 'projects', 'library', 'java', 'mysql', 'jdbc', 'enterprise', 'management', 'sql optimization', 'backend']
     },
     {
-      title: 'Cloud-Native Task Management API',
+      title: 'Saiteja Developer Portfolio & AI Assistant',
       category: 'Project',
-      description: 'RESTful microservices architecture built with Java Spring Boot and Angular, containerized with Docker on AWS EC2.',
+      description: 'High-performance minimalist portfolio featuring interactive star-field canvas physics, custom cursor animations, and a conversational AI Assistant with serverless email dispatch.',
       link: '#projects',
-      keywords: ['project', 'projects', 'cloud', 'task', 'management', 'api', 'spring boot', 'java', 'angular', 'docker', 'aws', 'ec2', 'microservices']
+      keywords: ['project', 'projects', 'portfolio', 'ai assistant', 'angular', 'typescript', 'tailwind', 'vercel', 'canvas', 'star field']
     },
     {
       title: 'Intelligent Spam Classifier',
@@ -314,6 +314,16 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     if (isPlatformBrowser(this.platformId)) {
+      if ('scrollRestoration' in history) {
+        history.scrollRestoration = 'manual';
+      }
+      try {
+        if (sessionStorage.getItem('scrollToTopOnRefresh') === 'true') {
+          sessionStorage.removeItem('scrollToTopOnRefresh');
+          window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+        }
+      } catch (e) {}
+
       const savedTheme = localStorage.getItem('theme');
       if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
         this.isDarkMode = true;

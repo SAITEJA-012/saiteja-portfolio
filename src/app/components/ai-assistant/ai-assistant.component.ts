@@ -591,13 +591,13 @@ export class AiAssistantComponent implements AfterViewChecked {
     }
 
     // 5. Projects / Selected Work / Research / Specific projects
-    if (q.includes('project') || q.includes('apps') || q.includes('food') || q.includes('traffic') || q.includes('yolo') || q.includes('spam') || q.includes('library') || q.includes('task management') || q.includes('research') || q.includes('icmdri') || q.includes('what has he built') || q.includes('what did he build') || (q.includes('work') && !q.includes('where does he work') && !q.includes('shipconsole'))) {
+    if (q.includes('project') || q.includes('apps') || q.includes('food') || q.includes('traffic') || q.includes('yolo') || q.includes('spam') || q.includes('library') || q.includes('portfolio') || q.includes('research') || q.includes('icmdri') || q.includes('what has he built') || q.includes('what did he build') || (q.includes('work') && !q.includes('where does he work') && !q.includes('shipconsole'))) {
       return "🚀 **Saiteja's Featured Projects:**\n\n" +
              "1. **Enterprise PL/SQL Migration Toolkit:** Automated zero-downtime schema & ETL migration engine for AWS RDS migrations.\n" +
              "2. **Food AI & Calorie Estimation:** Published research at ICMDRI (Top 15% innovation) with MobileNetV2 (92% accuracy).\n" +
              "3. **Real-Time Traffic Surveillance:** YOLOv7 vehicle tracking pipeline with 96% detection mAP and multithreading.\n" +
              "4. **Library Automation System:** Institutional Java & MySQL management system (+35% operational efficiency).\n" +
-             "5. **Cloud-Native Task Management API:** Spring Boot & Angular microservices containerized with Docker on AWS EC2.\n" +
+             "5. **Developer Portfolio & AI Assistant:** Angular 21, Tailwind CSS, Canvas physics & conversational AI assistant (Live on Vercel).\n" +
              "6. **Intelligent Spam Classifier:** Machine Learning NLP pipeline with TF-IDF and ensemble classifiers (98.4% precision).";
     }
 
